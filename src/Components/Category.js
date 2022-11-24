@@ -18,7 +18,7 @@ const Category = () => {
       </div>
       {/* bottom part */}
       <h1 className="font-general text-3xl text-center font-[600] mt-20">All available car deals right now </h1>
-      <div className="bottom-part grid grid-cols-4 gap-2 px-40 py-20">
+      <div className="bottom-part grid grid-cols-1 gap-4 py-20 px-4 md:px-10 md:grid-cols-2 md:gap-4 lg:px-20 lg:grid-cols-3 xl:grid-cols-4 xl:px-40">
         {/* all car cards  */}
         <Card></Card>
         <Card></Card>

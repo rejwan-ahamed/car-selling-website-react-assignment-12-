@@ -6,11 +6,11 @@ const Hero = () => {
     <div>
       <div className="hero-main w-screen">
         <div className="main-hero-part h-screen flex flex-col justify-between items-center">
-          <div className="hero-top">
-            <h1 className="font-general text-black font-[600] text-4xl pt-20 text-center">
+          <div className="hero-top px-8 sm:px-0">
+            <h1 className="font-general text-black font-[600] text-4xl pt-20  sm:text-center">
               Buy and sell cars
             </h1>
-            <p className="font-general font-[500] mt-3">
+            <p className="font-general font-[500] mt-3 sm:text-center">
               Get best dill in your near by area. Get the best deals in best
               price.
             </p>

@@ -2,8 +2,8 @@ import React from "react";
 
 const WishList = () => {
   return (
-    <div>
-      <div className="top-section px-40">
+    <div className="px-4 md:px-10 lg:px-20 xl:px-40">
+      <div className="top-section">
         <h1 className="text-2xl font-general font-[600] text-left pt-10">
           Your wishlist
         </h1>
@@ -12,7 +12,7 @@ const WishList = () => {
         </p>
       </div>
       {/* table part start from here */}
-      <div className="table-main px-40 py-10">
+      <div className="table-main py-10">
         <div class="overflow-x-auto relative">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-[#F6F7F9] border-b border-gray-200">
