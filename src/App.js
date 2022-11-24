@@ -6,6 +6,7 @@ import Register from "../src/Components/Register/Register"
 import Main from "./Layout/Main";
 import Blog from '../src/Components/Blog/Blog'
 import Category from './Components/Category'
+import Details from "./Components/Details";
 
 function App() {
   const routers = createBrowserRouter([
@@ -18,6 +19,7 @@ function App() {
         { path: "/register", element: <Register></Register> },
         { path: "/blog", element: <Blog></Blog> },
         { path: "/category", element: <Category></Category> },
+        { path: "/details", element: <Details></Details> },
       ],
     },
   ]);
