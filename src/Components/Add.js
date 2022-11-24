@@ -1,4 +1,5 @@
 import React from "react";
+import { FaCar } from "react-icons/fa";
 
 const Add = () => {
   return (
@@ -17,28 +18,10 @@ const Add = () => {
               Tesla model-s
             </h5>
           </a>
-          <div className="location flex mt-4 text-black border-b pb-2 gap-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
-              />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 6h.008v.008H6V6z"
-              />
-            </svg>
-
-            <p className="font-[600]">SUV</p>
+          <div className="location flex mt-2 border-b pb-2 gap-1 items-center text-orange-500">
+            {/* <IoCarSportSharp></IoCarSportSharp> */}
+            <FaCar/>
+            <p className="font-[500]">Manosata, USA</p>
           </div>
           <div className="location flex mt-2 text-gray-500 border-b pb-2 gap-1">
             <svg
@@ -91,7 +74,7 @@ const Add = () => {
               href="/"
               className="w-full inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 justify-center"
             >
-              Buy it now
+              View details
             </a>
             <a
               href="/"

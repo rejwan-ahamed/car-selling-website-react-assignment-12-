@@ -26,6 +26,8 @@ const Header = () => {
             <Link to="/category">Category</Link>
             <Link to="/wish">Wish List</Link>
             <Link to="/order">My orders</Link>
+            <Link to="/add">Add product</Link>
+            <Link to="/products">My Products</Link>
           </Navbar.Collapse>
         </Navbar>
       </div>
