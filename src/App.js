@@ -8,6 +8,7 @@ import Blog from '../src/Components/Blog/Blog'
 import Category from './Components/Category'
 import Details from "./Components/Details";
 import WishList from "./Components/WishList";
+import Order from "./Components/Order";
 
 function App() {
   const routers = createBrowserRouter([
@@ -22,6 +23,7 @@ function App() {
         { path: "/category", element: <Category></Category> },
         { path: "/details", element: <Details></Details> },
         { path: "/wish", element: <WishList></WishList> },
+        { path: "/order", element: <Order></Order> },
       ],
     },
   ]);
