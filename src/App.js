@@ -7,6 +7,7 @@ import Main from "./Layout/Main";
 import Blog from '../src/Components/Blog/Blog'
 import Category from './Components/Category'
 import Details from "./Components/Details";
+import WishList from "./Components/WishList";
 
 function App() {
   const routers = createBrowserRouter([
@@ -20,6 +21,7 @@ function App() {
         { path: "/blog", element: <Blog></Blog> },
         { path: "/category", element: <Category></Category> },
         { path: "/details", element: <Details></Details> },
+        { path: "/wish", element: <WishList></WishList> },
       ],
     },
   ]);

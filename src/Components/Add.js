@@ -3,64 +3,116 @@ import React from "react";
 const Add = () => {
   return (
     <div>
-      <div class=" bg-white rounded-lg ">
+      <div className=" bg-white rounded-lg font-general">
         <a href="/">
           <img
-            class="rounded-t-lg"
+            className="rounded-t-lg"
             src="https://tesla-cdn.thron.com/delivery/public/image/tesla/03e533bf-8b1d-463f-9813-9a597aafb280/bvlatuR/std/4096x2560/M3-Homepage-Desktop-LHD"
             alt=""
           />
         </a>
-        <div class="p-5">
+        <div className="p-5">
           <a href="/">
-            <h5 class="text-2xl font-[600] tracking-tight text-gray-900 dark:text-white">
+            <h5 className="text-2xl font-[600] tracking-tight text-gray-900 dark:text-white">
               Tesla model-s
             </h5>
-            <p class="mb-2 font-[600] tracking-tight text-gray-500 dark:text-white">
-              SUV
-            </p>
           </a>
-          <div className="location flex mt-4">
+          <div className="location flex mt-4 text-black border-b pb-2 gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              fill="none"
               viewBox="0 0 24 24"
-              fill="currentColor"
+              stroke-width="1.5"
+              stroke="currentColor"
               class="w-6 h-6"
             >
               <path
-                fill-rule="evenodd"
-                d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z"
-                clip-rule="evenodd"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 6h.008v.008H6V6z"
               />
             </svg>
 
-            <p className="font-[600]">Manosata, USA</p>
+            <p className="font-[600]">SUV</p>
           </div>
-          <div className="seller flex mt-2 text-blue-600">
+          <div className="location flex mt-2 text-gray-500 border-b pb-2 gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              fill="none"
               viewBox="0 0 24 24"
-              fill="currentColor"
+              stroke-width="1.5"
+              stroke="currentColor"
               class="w-6 h-6"
             >
               <path
-                fill-rule="evenodd"
-                d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
-                clip-rule="evenodd"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
               />
             </svg>
 
-            <p className="font-[600] ">Manosata, USA</p>
+            <p className="font-[500]">Manosata, USA</p>
+          </div>
+          <div className="seller flex mt-2 text-gray-500 border-b pb-2 gap-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+
+            <p className="font-[500] ">Manosata, USA</p>
           </div>
           <div className="price">
-            <h1 className="font-general font-[600] text-4xl mt-2 mb-4 text-blue-700">$280</h1>
+            <h1 className="font-general font-[600] text-4xl mt-2 mb-4 text-blue-700">
+              $280
+            </h1>
           </div>
-          <a
-            href="/"
-            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Buy it now
-          </a>
+          <div className="button-group flex gap-2">
+            <a
+              href="/"
+              className="w-full inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 justify-center"
+            >
+              Buy it now
+            </a>
+            <a
+              href="/"
+              className="w-full inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>

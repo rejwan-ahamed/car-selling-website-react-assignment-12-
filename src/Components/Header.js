@@ -24,7 +24,7 @@ const Header = () => {
             </Link>
             <Link to="/blog">Blogs</Link>
             <Link to="/category">Category</Link>
-            <Link to="/navbars">Wish List</Link>
+            <Link to="/wish">Wish List</Link>
             <Link to="/navbars">My orders</Link>
           </Navbar.Collapse>
         </Navbar>
