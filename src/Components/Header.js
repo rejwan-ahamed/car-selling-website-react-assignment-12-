@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/MainContext";
 
 const Header = () => {
-  const { userLogout, user } = useContext(AuthContext);
+  const { userLogout, user, userState } = useContext(AuthContext);
+  console.warn(userState);
+  // getting user state from local storage
+  const userSateFromLocalStorage = localStorage.getItem("AccountStatus");
+
   const userLogoutButtonClicked = () => {
     userLogout();
   };
@@ -38,18 +42,28 @@ const Header = () => {
             <Link to="/category" className="hover:text-blue-700 mt-2">
               Category
             </Link>
-            <Link to="/wish" className="hover:text-blue-700 mt-2">
-              Wish List
-            </Link>
-            <Link to="/order" className="hover:text-blue-700 mt-2">
-              My orders
-            </Link>
-            <Link to="/add" className="hover:text-blue-700 mt-2">
-              Add product
-            </Link>
-            <Link to="/products" className="hover:text-blue-700 mt-2">
-              My Products
-            </Link>
+
+            {userState === "Seller" ? (
+              <>
+                {" "}
+                <Link to="/add" className="hover:text-blue-700 mt-2">
+                  Add product
+                </Link>
+                <Link to="/products" className="hover:text-blue-700 mt-2">
+                  My Products
+                </Link>
+              </>
+            ) : (
+              <>
+                {" "}
+                <Link to="/wish" className="hover:text-blue-700 mt-2">
+                  Wish List
+                </Link>
+                <Link to="/order" className="hover:text-blue-700 mt-2">
+                  My orders
+                </Link>
+              </>
+            )}
 
             {user ? (
               <Link

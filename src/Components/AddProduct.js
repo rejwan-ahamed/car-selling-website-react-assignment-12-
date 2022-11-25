@@ -1,12 +1,57 @@
-import React from "react";
+import moment from "moment/moment";
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import { AuthContext } from "../Context/MainContext";
 
 const AddProduct = () => {
+  const {user} = useContext(AuthContext)
+  const productData = (e) => {
+  const postTime = moment().format("MMMM Do YYYY, h:mm:ss a");
+    e.preventDefault();
+    const from = e.target;
+    const model = from.model.value;
+    const image = from.image.value;
+    const carType = from.carType.value;
+    const price = from.price.value;
+    const location = from.location.value;
+    const oldPrice = from.oldPrice.value;
+    const UsedTime = from.UsedTime.value;
+
+    const product = {
+      seller: user.email,
+      model: model,
+      image: image,
+      carType: carType,
+      price: price,
+      oldPrice: oldPrice,
+      location: location,
+      UsedTime: UsedTime,
+      postTime: postTime,
+      report: "false",
+      add: "false",
+      soldOut: "false",
+    };
+
+    fetch(`${process.env.REACT_APP_API_URL}/products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        toast.success("your product has been added");
+        console.warn(result);
+        from.reset()
+      });
+  };
   return (
     <div className="px-8 sm:px-40 pb-20 pt-10">
       <h1 className="font-general text-center text-3xl font-[600] py-10">
         Add your products.
       </h1>
-      <form>
+      <form onSubmit={productData}>
         <div class="grid gap-6 mb-6 md:grid-cols-2">
           <div>
             <label
@@ -16,7 +61,7 @@ const AddProduct = () => {
               Car model
             </label>
             <input
-              name="name"
+              name="model"
               type="text"
               id="first_name"
               class="bg-[#F6F7F9]  border-black border-2 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
@@ -48,14 +93,15 @@ const AddProduct = () => {
               Select car type
             </label>
             <select
+              name="carType"
               id="countries"
               class="bg-[#F6F7F9]  border-black border-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
               <option selected>Choose your Car type</option>
-              <option value="US">Ford</option>
-              <option value="CA">porsche</option>
-              <option value="FR">Mercedes</option>
-              <option value="DE">Lamborghini</option>
+              <option value="Ford">Ford</option>
+              <option value="porsche">porsche</option>
+              <option value="Mercedes">Mercedes</option>
+              <option value="Lamborghini">Lamborghini</option>
             </select>
           </div>
           <div>
@@ -82,8 +128,8 @@ const AddProduct = () => {
               Location
             </label>
             <input
-              name="price"
-              type="number"
+              name="location"
+              type="text"
               id="company"
               class="bg-[#F6F7F9]  border-black border-2 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
               placeholder="290"
@@ -98,7 +144,7 @@ const AddProduct = () => {
               Old price
             </label>
             <input
-              name="price"
+              name="oldPrice"
               type="number"
               id="company"
               class="bg-[#F6F7F9]  border-black border-2 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
@@ -114,7 +160,7 @@ const AddProduct = () => {
               Used Time
             </label>
             <input
-              name="price"
+              name="UsedTime"
               type="number"
               id="company"
               class="bg-[#F6F7F9]  border-black border-2 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"

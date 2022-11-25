@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/MainContext";
 
 const Register = () => {
   const { userRegister, updateUserProfile } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const froms = location.state?.from?.pathname || "/";
   const registerFromSubmit = (e) => {
     e.preventDefault();
     const from = e.target;
@@ -30,6 +33,7 @@ const Register = () => {
           UserProfile(name, img);
           console.log(res);
           toast.success("Your account has been created please login");
+          navigate(froms, { replace: true });
           // axios part here
           axios({
             url: `${process.env.REACT_APP_API_URL}/userRegister`,

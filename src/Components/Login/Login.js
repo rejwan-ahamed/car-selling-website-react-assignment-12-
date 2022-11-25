@@ -5,7 +5,8 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../Context/MainContext";
 
 const Login = () => {
-  const { userSignIN, googleSignIN, user, loader } = useContext(AuthContext);
+  const { userSignIN, googleSignIN, user, loader, SetUserState } =
+    useContext(AuthContext);
   const provider = new GoogleAuthProvider();
   const location = useLocation();
   const navigate = useNavigate();
@@ -19,11 +20,19 @@ const Login = () => {
 
     userSignIN(email, password)
       .then((res) => {
+        const userEmail = email;
+        fetch(`${process.env.REACT_APP_API_URL}/userData/${userEmail}`)
+          .then((res) => res.json())
+          .then((result) => localStorage.setItem('AccountStatus',result[0].accountType));
+
+
         console.log(res);
         const UserData = {
           email: res.user.email,
         };
+
         console.log(UserData);
+
         // fetch("http://localhost:5000/jwt", {
         //   method: "POST",
         //   headers: {
@@ -50,7 +59,7 @@ const Login = () => {
     googleSignIN(provider)
       .then((res) => {
         const email = res.user.email;
-        console.log(email)
+        console.log(email);
         toast.success("you are successfully login");
         navigate(froms, { replace: true });
         fetch(`${process.env.REACT_APP_API_URL}/socialLogin/${email}`)
