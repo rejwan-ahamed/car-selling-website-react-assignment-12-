@@ -8,7 +8,7 @@ const Header = () => {
   const userLogoutButtonClicked = () => {
     userLogout();
   };
-  console.log(user)
+  console.log(user);
   return (
     <div class>
       <div className="nav-main border-b font-general">
@@ -51,9 +51,29 @@ const Header = () => {
               My Products
             </Link>
 
-            <Link onClick={userLogoutButtonClicked} className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700">
-              Logout
-            </Link>
+            {user ? (
+              <Link
+                onClick={userLogoutButtonClicked}
+                className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700"
+              >
+                Logout
+              </Link>
+            ) : (
+              <div className="button-group sm:flex justify-center items-center gap-2 ">
+                <Link
+                  to="/login"
+                  className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </Navbar.Collapse>
         </Navbar>
       </div>
