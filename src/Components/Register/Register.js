@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -13,8 +14,13 @@ const Register = () => {
     const img = from.image.value;
     const password = from.password.value;
     const Cpassword = from.Cpassword.value;
-    const account = from.account.value
-    console.log(account)
+    const account = from.account.value;
+
+    const userData = {
+      email: email,
+      name: name,
+      accountType: account,
+    };
 
     if (password !== Cpassword) {
       toast.error("Your Password and Confirm password dose not match");
@@ -24,6 +30,14 @@ const Register = () => {
           UserProfile(name, img);
           console.log(res);
           toast.success("Your account has been created please login");
+          // user object
+
+          console.warn(userData);
+          axios({
+            url: "http://localhost:5000/userRegister",
+            method: "POST",
+            data: userData,
+          });
           from.reset();
         })
         .catch((error) => {
@@ -134,7 +148,7 @@ const Register = () => {
           </label>
           <select
             id="countries"
-            name='account'
+            name="account"
             class="mb-6 bg-[#F6F7F9]  border-black border-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <option selected>Select your account type</option>
