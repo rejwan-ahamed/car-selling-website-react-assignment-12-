@@ -61,7 +61,7 @@ const Login = () => {
   return (
     <div>
       <div className="login-from-main flex justify-center items-center mt-20 px-4 mb-20">
-        <form className="lg:w-[20rem] text-left" onSubmit={loginFromSubmit}>
+        <form className="w-[20rem] text-left" onSubmit={loginFromSubmit}>
           <div class="mb-6">
             <label
               for="email"
@@ -73,7 +73,7 @@ const Login = () => {
               type="email"
               id="email"
               name="email"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="bg-[#F6F7F9]  border-black border-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="john.doe@company.com"
               required=""
             />
@@ -90,7 +90,7 @@ const Login = () => {
               type="password"
               id="confirm_password"
               name="password"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="bg-[#F6F7F9]  border-black border-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="•••••••••"
               required=""
             />
@@ -132,7 +132,7 @@ const Login = () => {
           {/* redirect to register button */}
           <Link
             to="/register"
-            className="font-general font-medium hover:text-orange-500"
+            className="font-general font-medium hover:text-blue-600"
           >
             I don't have an account Register
           </Link>
