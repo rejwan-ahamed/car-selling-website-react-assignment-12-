@@ -1,64 +1,67 @@
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { GoogleAuthProvider } from "firebase/auth";
+import { AuthContext } from "../../Context/MainContext";
 
 const Login = () => {
+  const { userSignIN, googleSignIN } = useContext(AuthContext);
+  const provider = new GoogleAuthProvider();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const froms = location.state?.from?.pathname || "/";
+  const loginFromSubmit = (e) => {
+    e.preventDefault();
+    const from = e.target;
+    const email = from.email.value;
+    const password = from.password.value;
+    console.log(email, password);
 
-  // const { userSignIN, googleSignIN} = useContext(AuthContext);
-  // const provider = new GoogleAuthProvider();
-  // const location = useLocation();
-  // const navigate = useNavigate();
-  // const froms = location.state?.from?.pathname || "/";
-  // const loginFromSubmit = (e) => {
-  //   e.preventDefault();
-  //   const from = e.target;
-  //   const email = from.email.value;
-  //   const password = from.password.value;
-  //   console.log(email, password);
+    userSignIN(email, password)
+      .then((res) => {
+        console.log(res);
+        const UserData = {
+          email: res.user.email,
+        };
+        console.log(UserData);
+        // fetch("http://localhost:5000/jwt", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(UserData),
+        // })
+        //   .then((res) => res.json())
+        //   .then((result) => {
+        //     console.warn(result)
+        //     localStorage.setItem('token', result.token)
+        //   });
 
-  //   userSignIN(email, password)
-  //     .then((res) => {
-  //       console.log(res);
-  //       const UserData = {
-  //         email: res.user.email,
-  //       };
-  //       console.log(UserData)
-  //       fetch("http://localhost:5000/jwt", {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(UserData),
-  //       })
-  //         .then((res) => res.json())
-  //         .then((result) => {
-  //           console.warn(result)
-  //           localStorage.setItem('token', result.token)
-  //         });
+        from.reset();
+        toast.success("You are successfully login");
+        navigate(froms, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
-  //       from.reset();
-  //       toast.success("You are successfully login");
-  //       navigate(froms, { replace: true });
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error.message);
-  //     });
-  // };
-
-  // const googleLoginButtonClicked = () => {
-  //   googleSignIN(provider)
-  //     .then((res) => {
-  //       console.log(res);
-  //       toast.success("you are successfully login");
-  //       navigate(froms, { replace: true });
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error.message);
-  //     });
-  // };
+  const googleLoginButtonClicked = () => {
+    googleSignIN(provider)
+      .then((res) => {
+        console.log(res);
+        toast.success("you are successfully login");
+        navigate(froms, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
   return (
     <div>
       <div className="login-from-main flex justify-center items-center mt-20 px-4 mb-20">
-        <form className="lg:w-[20rem] text-left">
+        <form className="lg:w-[20rem] text-left" onSubmit={loginFromSubmit}>
           <div class="mb-6">
             <label
               for="email"
@@ -104,9 +107,9 @@ const Login = () => {
 
           <div className="button-group mt-8">
             <button
-              
+              onClick={googleLoginButtonClicked}
               type="button"
-              class="text-white w-full bg-[#ff5708] hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
+              class="text-white w-full bg-orange-500 hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
             >
               <svg
                 class="mr-2 -ml-1 w-4 h-4"
@@ -129,7 +132,7 @@ const Login = () => {
           {/* redirect to register button */}
           <Link
             to="/register"
-            className="font-general font-medium hover:text-blue-500"
+            className="font-general font-medium hover:text-orange-500"
           >
             I don't have an account Register
           </Link>
