@@ -1,10 +1,15 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 import { FaCarAlt } from "react-icons/fa";
+import { AuthContext } from "../Context/MainContext";
+import toast from "react-hot-toast";
 
 const Card = ({ carData }) => {
+  const [productData, setProductData] = useState([]);
+  const { user } = useContext(AuthContext);
   const {
+    _id,
     seller,
     model,
     image,
@@ -21,7 +26,44 @@ const Card = ({ carData }) => {
     setIsOpen(false);
   }
 
-  function openModal() {
+  // from data
+  const booking = (e) => {
+    e.preventDefault();
+    const from = e.target;
+    const buyerEmail = from.buyerEmail.value;
+    const sellerEmail = from.sellerEmail.value;
+    const product = from.product.value;
+    const phone = from.phone.value;
+    const location = from.location.value;
+
+    const bookingData = {
+      productID: _id,
+      buyerEmail: buyerEmail,
+      sellerEmail: sellerEmail,
+      product: product,
+      phone: phone,
+      location: location,
+    };
+    fetch(`http://localhost:5000/userBooking`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookingData),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        toast.success("your product has been booked");
+        setIsOpen(false);
+        console.warn(result);
+        from.reset();
+      });
+  };
+
+  function openModal(id) {
+    fetch(`http://localhost:5000/singleProduct/${id}`)
+      .then((res) => res.json())
+      .then((result) => setProductData(result[0]));
     setIsOpen(true);
   }
   return (
@@ -139,7 +181,7 @@ const Card = ({ carData }) => {
           </div>
           <div className="price">
             <h1 className="font-general font-[600] text-4xl mt-2 mb-4 text-blue-700">
-              $280
+             ${price}
             </h1>
           </div>
           {/* report item start here*/}
@@ -163,10 +205,10 @@ const Card = ({ carData }) => {
 
           <div className="button-group flex gap-2">
             <Link
-              onClick={openModal}
+              onClick={() => openModal(_id)}
               className="w-full inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 justify-center"
             >
-              Buy it now
+              Book now
             </Link>
             <a
               href="/"
@@ -218,7 +260,7 @@ const Card = ({ carData }) => {
                     leaveTo="opacity-0 scale-95"
                   >
                     <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                      <form class="space-y-6" action="#">
+                      <form class="space-y-6" action="#" onSubmit={booking}>
                         <h5 class="text-xl font-medium text-gray-900 dark:text-white">
                           Order Details
                         </h5>
@@ -227,12 +269,14 @@ const Card = ({ carData }) => {
                             for="email"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           >
-                            User Name
+                            Buyer email address
                           </label>
                           <input
                             type="email"
-                            name="email"
+                            name="buyerEmail"
                             id="email"
+                            value={user.email}
+                            readOnly
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                             placeholder="name@company.com"
                             required
@@ -243,13 +287,15 @@ const Card = ({ carData }) => {
                             for="password"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           >
-                            Email address
+                            seller email address
                           </label>
                           <input
-                            type="password"
-                            name="password"
+                            type="text"
+                            name="sellerEmail"
                             id="password"
-                            placeholder="tesla@gmail.com"
+                            value={productData.seller}
+                            readOnly
+                            placeholder="seller name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                             required
                           />
@@ -263,8 +309,10 @@ const Card = ({ carData }) => {
                           </label>
                           <input
                             type="text"
-                            name="password"
+                            name="product"
                             id="password"
+                            value={productData.model}
+                            readOnly
                             placeholder="tesla car"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                             required
@@ -278,10 +326,12 @@ const Card = ({ carData }) => {
                             Price
                           </label>
                           <input
-                            type="number"
-                            name="password"
+                            type="text"
+                            name="price"
                             id="password"
-                            placeholder="223"
+                            value={productData.price}
+                            readOnly
+                            placeholder="tesla car"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                             required
                           />
@@ -294,8 +344,8 @@ const Card = ({ carData }) => {
                             Phone Number
                           </label>
                           <input
-                            type="number"
-                            name="password"
+                            type="phone"
+                            name="phone"
                             id="password"
                             placeholder="223"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -311,7 +361,7 @@ const Card = ({ carData }) => {
                           </label>
                           <input
                             type="text"
-                            name="password"
+                            name="location"
                             id="password"
                             placeholder="223"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"

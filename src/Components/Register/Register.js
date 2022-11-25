@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/MainContext";
 
 const Register = () => {
-  const { userRegister, updateUserProfile } = useContext(AuthContext);
+  const { userRegister, updateUserProfile,SetUserState } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const froms = location.state?.from?.pathname || "/";
@@ -42,6 +42,14 @@ const Register = () => {
           })
             .then((result) => console.warn(result))
             .catch((error) => console.log(error));
+
+          fetch(`${process.env.REACT_APP_API_URL}/userData/${email}`)
+            .then((res) => res.json())
+            .then((result) => {
+              localStorage.setItem("AccountStatus", result[0].accountType);
+              SetUserState(result[0].accountType);
+            });
+
           from.reset();
         })
         .catch((error) => {
