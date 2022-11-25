@@ -2,27 +2,28 @@ import {Timeline } from "flowbite-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CarCard = () => {
+const CarCard = ({carData}) => {
+  const {model,totalCars,totalSellers,lowestPrice,heightPrice,Img,logo}=carData
   return (
     <div>
       <div class=" bg-white rounded-lg ">
         <a href="/">
-          <img
-            class="rounded-t-lg"
-            src="https://tesla-cdn.thron.com/delivery/public/image/tesla/03e533bf-8b1d-463f-9813-9a597aafb280/bvlatuR/std/4096x2560/M3-Homepage-Desktop-LHD"
+        <img
+            className="rounded-t-lg"
+            src={Img}
             alt=""
           />
         </a>
         <div class="p-5">
           <a href="/">
             <h5 class="text-2xl font-[600] tracking-tight text-gray-900 dark:text-white">
-              Marsedis
+              {model}
             </h5>
             <p class="mb-1 font-[500] tracking-tight text-gray-500 dark:text-white mt-2">
-              Total cars: <b className="text-black"> 250</b>
+              Total cars: <b className="text-black"> {totalCars}</b>
             </p>
             <p class="mb-3 font-[500] tracking-tight text-gray-500 dark:text-white">
-              Total sellers: <b className="text-black"> 250</b>
+              Total sellers: <b className="text-black"> {totalSellers}</b>
             </p>
 
             <Timeline>
@@ -32,7 +33,7 @@ const CarCard = () => {
                   <Timeline.Title>
                     Lowest price
                     <br />
-                    200k
+                    {lowestPrice}
                   </Timeline.Title>
                 </Timeline.Content>
               </Timeline.Item>
@@ -42,7 +43,7 @@ const CarCard = () => {
                   <Timeline.Title>
                     Hight price
                     <br />
-                    340k
+                    {heightPrice}
                   </Timeline.Title>
                 </Timeline.Content>
               </Timeline.Item>
@@ -52,7 +53,7 @@ const CarCard = () => {
 
           <div className="price"></div>
           <Link
-            to='/category'
+            to={`/category/${model}`}
             class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             View details

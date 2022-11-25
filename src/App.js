@@ -13,6 +13,7 @@ import AddProduct from "./Components/AddProduct";
 import MyProducts from "./Components/MyProducts";
 import  { Toaster } from 'react-hot-toast';
 import Private from "./Private/Private";
+import Catagories from "./Components/Catagories";
 
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
         { path: "/login", element: <Login></Login> },
         { path: "/register", element: <Register></Register> },
         { path: "/blog", element: <Blog></Blog> },
-        { path: "/category", element: <Private><Category></Category></Private> },
+        { path: "/category/:model", element: <Private><Category></Category></Private> },
+        { path: "/categorys", element: <Private><Catagories></Catagories></Private> },
         { path: "/details", element: <Details></Details> },
         { path: "/wish", element: <WishList></WishList> },
         { path: "/order", element: <Order></Order> },

@@ -99,7 +99,7 @@ const AddProduct = () => {
             >
               <option selected>Choose your Car type</option>
               <option value="Ford">Ford</option>
-              <option value="porsche">porsche</option>
+              <option value="porsche">Porsche</option>
               <option value="Mercedes">Mercedes</option>
               <option value="Lamborghini">Lamborghini</option>
             </select>

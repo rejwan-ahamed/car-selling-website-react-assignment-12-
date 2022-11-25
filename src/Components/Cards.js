@@ -9,7 +9,7 @@ import {
   IoCarSportSharp,
 } from "react-icons/fa";
 
-const Card = ({ carData }) => {
+const Cards = ({ carData }) => {
   const { seller,model,image,carType,price,oldPrice,location,UsedTime,postTime, } = carData;
   let [isOpen, setIsOpen] = useState(false);
 
@@ -347,4 +347,4 @@ const Card = ({ carData }) => {
   );
 };
 
-export default Card;
+export default Cards;

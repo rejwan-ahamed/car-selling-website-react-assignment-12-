@@ -1,22 +1,19 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import Card from "./Card";
+import Cards from "./Cards";
 
-const Category = () => {
-  const params = useParams();
-  const paramsModel = params.model;
+const Catagories = () => {
   const [car, setCar] = useState([]);
   const [allCars, setAllCars] = useState([]);
   // fetch cars
-  fetch(`http://localhost:5000/CarCategory?model=${paramsModel}`)
+  fetch("http://localhost:5000/CarCategory")
     .then((res) => res.json())
     .then((result) => setCar(result[0]));
 
   // fetching all cars list default poursh
-  fetch(`http://localhost:5000/allCars?model=${paramsModel}`)
+  fetch("http://localhost:5000/allCars")
     .then((res) => res.json())
     .then((result) => setAllCars(result));
-  // window.scrollTo(0, 0);
+
   return (
     <div>
       <div className="upper-part">
@@ -37,12 +34,13 @@ const Category = () => {
       </h1>
       <div className="bottom-part grid grid-cols-1 gap-4 py-20 px-4 md:px-10 md:grid-cols-2 md:gap-4 lg:px-20 lg:grid-cols-3 xl:grid-cols-4 xl:px-40">
         {/* all car cards  */}
+
         {allCars.map((data) => (
-          <Card key={data._id} carData={data}></Card>
+          <Cards key={data._id} carData={data}></Cards>
         ))}
       </div>
     </div>
   );
 };
 
-export default Category;
+export default Catagories;

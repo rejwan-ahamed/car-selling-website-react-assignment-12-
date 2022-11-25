@@ -39,7 +39,7 @@ const Header = () => {
             <Link to="/blog" className="hover:text-blue-700 mt-2">
               Blogs
             </Link>
-            <Link to="/category" className="hover:text-blue-700 mt-2">
+            <Link to="/categorys" className="hover:text-blue-700 mt-2">
               Category
             </Link>
 
