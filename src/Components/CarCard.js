@@ -1,18 +1,21 @@
-import {Timeline } from "flowbite-react";
+import { Timeline } from "flowbite-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CarCard = ({carData}) => {
-  const {model,totalCars,totalSellers,lowestPrice,heightPrice,Img,logo}=carData
+const CarCard = ({ carData }) => {
+  const {
+    model,
+    totalCars,
+    totalSellers,
+    lowestPrice,
+    heightPrice,
+    Img,
+  } = carData;
   return (
     <div>
       <div class=" bg-white rounded-lg ">
         <a href="/">
-        <img
-            className="rounded-t-lg"
-            src={Img}
-            alt=""
-          />
+          <img className="rounded-t-lg" src={Img} alt="" />
         </a>
         <div class="p-5">
           <a href="/">

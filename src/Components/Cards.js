@@ -93,7 +93,7 @@ const Cards = ({ carData }) => {
     <div>
       <div className=" bg-white rounded-lg font-general">
         <a href="/">
-          <img className="rounded-t-lg h-[40%] w-full" src={image} alt="" />
+          <img className="rounded-t-lg w-full h-[12rem]" src={image} alt="" />
         </a>
         <div className="p-5">
           <a href="/">

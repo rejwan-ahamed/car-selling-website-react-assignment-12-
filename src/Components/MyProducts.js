@@ -7,13 +7,14 @@ import MyProductTableData from "./MyProductTableData";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
+  const [AD, setADS] = useState(null);
   console.log(user.email);
 
   // getting data by react query
   const { refetch } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/productsData/hush@gmail.com`)
+      fetch(`http://localhost:5000/productsData/${user.email}`)
         .then((res) => res.json())
         .then((result) => setProducts(result)),
   });
@@ -31,6 +32,38 @@ const MyProducts = () => {
           refetch();
         }
       });
+  };
+
+  // ads
+  const ADS = (id) => {
+    fetch(`http://localhost:5000/singleProduct/${id}`)
+      .then((res) => res.json())
+      .then((result) => setADS(result[0]));
+
+    const ADSbody = {
+      productID: AD._id,
+      image: AD.image,
+      carType: AD.carType,
+      model: AD.model,
+      price: AD.price,
+      seller: AD.image,
+      location: AD.location,
+    };
+    console.warn(ADSbody);
+    fetch(`${process.env.REACT_APP_API_URL}/productADS`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ADSbody),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        toast.success("your product ADS has been published");
+        console.log(result);
+      });
+
+    console.warn(id);
   };
 
   // console.warn(products)
@@ -95,6 +128,7 @@ const MyProducts = () => {
                     key={data._id}
                     products={data}
                     getID={deleteID}
+                    adsButton={ADS}
                   ></MyProductTableData>
                 ))}
               </tbody>

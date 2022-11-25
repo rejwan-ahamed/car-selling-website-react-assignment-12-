@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import BigLoader from "./BigLoader";
 import Card from "./Card";
 
 const Category = () => {
@@ -13,10 +15,24 @@ const Category = () => {
     .then((result) => setCar(result[0]));
 
   // fetching all cars list default poursh
-  fetch(`http://localhost:5000/allCars?model=${paramsModel}`)
-    .then((res) => res.json())
-    .then((result) => setAllCars(result));
+
+      // getting data by react query
+      const {data:categorys, refetch, isLoading } = useQuery({
+        queryKey: ["repoData"],
+        queryFn: () =>
+          fetch(`http://localhost:5000/allCars?model=${paramsModel}`)
+            .then((res) => res.json())
+            .then((result) => setAllCars(result)),
+      });
+
+  // fetch(`http://localhost:5000/allCars?model=${paramsModel}`)
+  //   .then((res) => res.json())
+  //   .then((result) => setAllCars(result));
   // window.scrollTo(0, 0);
+
+  if(isLoading){
+    return <BigLoader></BigLoader>
+  }
   return (
     <div>
       <div className="upper-part">
