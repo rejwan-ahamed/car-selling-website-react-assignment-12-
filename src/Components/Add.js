@@ -2,27 +2,27 @@ import React from "react";
 import { FaCar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const Add = () => {
+const Add = ({adsData}) => {
   return (
     <div>
       <div className=" bg-white rounded-lg font-general">
         <a href="/">
           <img
             className="rounded-t-lg w-full h-[11rem]"
-            src="https://tesla-cdn.thron.com/delivery/public/image/tesla/03e533bf-8b1d-463f-9813-9a597aafb280/bvlatuR/std/4096x2560/M3-Homepage-Desktop-LHD"
+            src={adsData.image}
             alt=""
           />
         </a>
         <div className="p-5">
           <a href="/">
             <h5 className="text-2xl font-[600] tracking-tight text-gray-900 dark:text-white">
-              Tesla model-s
+            {adsData.model}
             </h5>
           </a>
           <div className="location flex mt-2 border-b pb-2 gap-1 items-center text-orange-500">
             {/* <IoCarSportSharp></IoCarSportSharp> */}
             <FaCar/>
-            <p className="font-[500]">Manosata, USA</p>
+            <p className="font-[500]">{adsData.carType}</p>
           </div>
           <div className="location flex mt-2 text-gray-500 border-b pb-2 gap-1">
             <svg
@@ -45,7 +45,7 @@ const Add = () => {
               />
             </svg>
 
-            <p className="font-[500]">Manosata, USA</p>
+            <p className="font-[500]">{adsData.location}</p>
           </div>
           <div className="seller flex mt-2 text-gray-500 border-b pb-2 gap-1">
             <svg
@@ -63,11 +63,11 @@ const Add = () => {
               />
             </svg>
 
-            <p className="font-[500] ">Manosata, USA</p>
+            <p className="font-[500] ">{adsData.seller}</p>
           </div>
           <div className="price">
             <h1 className="font-general font-[600] text-4xl mt-2 mb-4 text-blue-700">
-              $280
+            ${adsData.price}
             </h1>
           </div>
           <div className="button-group flex gap-2">

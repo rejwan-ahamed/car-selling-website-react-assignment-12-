@@ -1,3 +1,4 @@
+import moment from "moment/moment";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
@@ -39,15 +40,16 @@ const MyProducts = () => {
     fetch(`http://localhost:5000/singleProduct/${id}`)
       .then((res) => res.json())
       .then((result) => setADS(result[0]));
-
+    const postTime = moment().format("lll");
     const ADSbody = {
       productID: AD._id,
       image: AD.image,
       carType: AD.carType,
       model: AD.model,
       price: AD.price,
-      seller: AD.image,
+      seller: AD.seller,
       location: AD.location,
+      time: postTime,
     };
     console.warn(ADSbody);
     fetch(`${process.env.REACT_APP_API_URL}/productADS`, {

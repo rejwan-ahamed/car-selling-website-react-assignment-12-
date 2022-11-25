@@ -4,6 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { FaCarAlt } from "react-icons/fa";
 import { AuthContext } from "../Context/MainContext";
 import toast from "react-hot-toast";
+import '../Css/Card.css'
 
 const Card = ({ carData }) => {
   const [productData, setProductData] = useState([]);
@@ -90,7 +91,7 @@ const Card = ({ carData }) => {
   };
 
   return (
-    <div>
+    <div className="hover:shadow-2xl card-main-body">
       <div className=" bg-white rounded-lg font-general">
         <a href="/">
           <img className="rounded-t-lg w-full h-[12rem]" src={image} alt="" />

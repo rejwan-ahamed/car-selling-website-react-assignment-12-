@@ -91,7 +91,7 @@ const Cards = ({ carData }) => {
 
   return (
     <div>
-      <div className=" bg-white rounded-lg font-general">
+      <div className=" bg-white rounded-lg font-general hover:shadow-2xl card-main-body">
         <a href="/">
           <img className="rounded-t-lg w-full h-[12rem]" src={image} alt="" />
         </a>
