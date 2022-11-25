@@ -30,14 +30,14 @@ const Register = () => {
           UserProfile(name, img);
           console.log(res);
           toast.success("Your account has been created please login");
-          // user object
-
-          console.warn(userData);
+          // axios part here
           axios({
-            url: "http://localhost:5000/userRegister",
+            url: `${process.env.REACT_APP_API_URL}/userRegister`,
             method: "POST",
             data: userData,
-          });
+          })
+            .then((result) => console.warn(result))
+            .catch((error) => console.log(error));
           from.reset();
         })
         .catch((error) => {
