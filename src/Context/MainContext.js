@@ -20,7 +20,7 @@ const MainContext = ({ children }) => {
   const auth = getAuth(app);
 
   // getting user data from localStorage
-  const userLocalData = localStorage.getItem("AccountStatus")
+  // const userLocalData = localStorage.getItem("AccountStatus")
   //   set user
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
@@ -43,18 +43,18 @@ const MainContext = ({ children }) => {
   // google sign in
   const googleSignIN = (provider) => {
     setLoader(true);
-    SetUserState(userLocalData)
+    // SetUserState(userLocalData)
     return signInWithPopup(auth, provider);
   };
   // github sign in
   const githubSignIN = (provider) => {
     setLoader(true);
-    SetUserState(userLocalData)
+    // SetUserState(userLocalData)
     return signInWithPopup(auth, provider);
   };
   //   user logout
   const userLogout = () => {
-    SetUserState(userLocalData)
+    // SetUserState(userLocalData)
     setLoader(true);
     return signOut(auth);
   };
@@ -62,7 +62,7 @@ const MainContext = ({ children }) => {
   //   set user after logIN or logOut
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUserInfo) => {
-      SetUserState(userLocalData)
+      // SetUserState(userLocalData)
       setUser(currentUserInfo);
       setLoader(false);
     });

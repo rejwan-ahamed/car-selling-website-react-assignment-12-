@@ -23,8 +23,10 @@ const Login = () => {
         const userEmail = email;
         fetch(`${process.env.REACT_APP_API_URL}/userData/${userEmail}`)
           .then((res) => res.json())
-          .then((result) => localStorage.setItem('AccountStatus',result[0].accountType));
-
+          .then((result) => {
+            localStorage.setItem("AccountStatus", result[0].accountType);
+            SetUserState(result[0].accountType);
+          });
 
         console.log(res);
         const UserData = {
@@ -65,6 +67,13 @@ const Login = () => {
         fetch(`${process.env.REACT_APP_API_URL}/socialLogin/${email}`)
           .then((res) => res.json())
           .then((result) => console.warn(result));
+
+        fetch(`${process.env.REACT_APP_API_URL}/userData/${email}`)
+          .then((res) => res.json())
+          .then((result) => {
+            localStorage.setItem("AccountStatus", result[0].accountType);
+            SetUserState(result[0].accountType);
+          });
       })
       .catch((error) => {
         toast.error(error.message);

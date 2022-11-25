@@ -1,16 +1,20 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
-import {
-  FaCar,
-  FaCarAlt,
-  FaCaravan,
-  FaCarSide,
-  IoCarSportSharp,
-} from "react-icons/fa";
+import { FaCarAlt } from "react-icons/fa";
 
 const Card = ({ carData }) => {
-  const { seller,model,image,carType,price,oldPrice,location,UsedTime,postTime, } = carData;
+  const {
+    seller,
+    model,
+    image,
+    carType,
+    price,
+    oldPrice,
+    location,
+    UsedTime,
+    postTime,
+  } = carData;
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -24,11 +28,7 @@ const Card = ({ carData }) => {
     <div>
       <div className=" bg-white rounded-lg font-general">
         <a href="/">
-          <img
-            className="rounded-t-lg h-[40%] w-full"
-            src={image}
-            alt=""
-          />
+          <img className="rounded-t-lg h-[40%] w-full" src={image} alt="" />
         </a>
         <div className="p-5">
           <a href="/">
