@@ -1,5 +1,8 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { useQuery } from "react-query";
+import { AuthContext } from "../Context/MainContext";
+import Loader from "./Loader";
 
 const Order = () => {
   let [isOpen, setIsOpen] = useState(false);
@@ -11,6 +14,23 @@ const Order = () => {
   function openModal() {
     setIsOpen(true);
   }
+
+  const [order, setOrder] = useState([]);
+  const { user } = useContext(AuthContext);
+
+  // getting data by react query
+  const { refetch, isLoading } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: () =>
+      fetch(`http://localhost:5000/userBookingData/${user.email}`)
+        .then((res) => res.json())
+        .then((result) => setOrder(result)),
+  });
+
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
+
   return (
     <div className="px-4 md:px-10 lg:px-20 xl:px-40">
       <div className="top-section">
@@ -45,26 +65,28 @@ const Order = () => {
               </tr>
             </thead>
             <tbody>
-              <tr class="bg-[#F6F7F9] border-b dark:bg-gray-800 dark:border-gray-700">
-                <th
-                  scope="row"
-                  class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  Apple MacBook Pro 17"
-                </th>
-                <td class="py-4 px-6">Sliver</td>
-                <td class="py-4 px-6">Laptop</td>
-                <td class="py-4 px-6">$2999</td>
-                <td class="py-4 px-6">
-                  <button
-                  onClick={()=>openModal()}
-                    type="button"
-                    class="text-white bg-lime-600 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              {order.map((data) => (
+                <tr class="bg-[#F6F7F9] border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th
+                    scope="row"
+                    class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    Pay
-                  </button>
-                </td>
-              </tr>
+                    {data.product}
+                  </th>
+                  <td class="py-4 px-6">{data.sellerEmail}</td>
+                  <td class="py-4 px-6">{data.location}</td>
+                  <td class="py-4 px-6">{data.price}</td>
+                  <td class="py-4 px-6">
+                    <button
+                      onClick={() => openModal()}
+                      type="button"
+                      class="text-white bg-lime-600 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      Pay
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
 

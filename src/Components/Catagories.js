@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useQuery } from "react-query";
 import Cards from "./Cards";
+import BigLoader from '../Components/BigLoader'
 
 const Catagories = () => {
   const [car, setCar] = useState([]);
@@ -9,10 +11,23 @@ const Catagories = () => {
     .then((res) => res.json())
     .then((result) => setCar(result[0]));
 
-  // fetching all cars list default poursh
-  fetch("http://localhost:5000/allCars")
-    .then((res) => res.json())
-    .then((result) => setAllCars(result));
+    // getting data by react query
+    const {data:categorys, refetch, isLoading } = useQuery({
+      queryKey: ["repoData"],
+      queryFn: () =>
+        fetch(`http://localhost:5000/allCars`)
+          .then((res) => res.json())
+          .then((result) => setAllCars(result)),
+    });
+  
+    if(isLoading){
+      return <BigLoader></BigLoader>
+    }
+
+  // // fetching all cars list default poursh
+  // fetch("http://localhost:5000/allCars")
+  //   .then((res) => res.json())
+  //   .then((result) => setAllCars(result));
 
   return (
     <div>

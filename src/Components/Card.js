@@ -34,6 +34,7 @@ const Card = ({ carData }) => {
     const sellerEmail = from.sellerEmail.value;
     const product = from.product.value;
     const phone = from.phone.value;
+    const price = from.price.value;
     const location = from.location.value;
 
     const bookingData = {
@@ -42,6 +43,7 @@ const Card = ({ carData }) => {
       sellerEmail: sellerEmail,
       product: product,
       phone: phone,
+      price: price,
       location: location,
     };
     fetch(`http://localhost:5000/userBooking`, {
@@ -66,6 +68,27 @@ const Card = ({ carData }) => {
       .then((result) => setProductData(result[0]));
     setIsOpen(true);
   }
+
+  // report products
+  const reportProduct = (id) => {
+    const reportBody = {
+      productID: id,
+      user: user.email
+    };
+    fetch(`http://localhost:5000/report`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reportBody),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        toast.error("Thank you for your feedback");
+        console.log(result)
+      });
+  };
+
   return (
     <div>
       <div className=" bg-white rounded-lg font-general">
@@ -181,11 +204,14 @@ const Card = ({ carData }) => {
           </div>
           <div className="price">
             <h1 className="font-general font-[600] text-4xl mt-2 mb-4 text-blue-700">
-             ${price}
+              ${price}
             </h1>
           </div>
           {/* report item start here*/}
-          <Link className="report-item flex bg-red-600 rounded-full text-white text-[14px] max-w-max items-center px-3 py-1 gap-2 mb-4 font-general font-[500]">
+          <Link
+            onClick={() => reportProduct(_id)}
+            className="report-item flex bg-red-600 rounded-full text-white text-[14px] max-w-max items-center px-3 py-1 gap-2 mb-4 font-general font-[500]"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
