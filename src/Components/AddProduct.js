@@ -4,9 +4,9 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../Context/MainContext";
 
 const AddProduct = () => {
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const productData = (e) => {
-  const postTime = moment().format("MMMM Do YYYY, h:mm:ss a");
+    const postTime = moment().format("lll");
     e.preventDefault();
     const from = e.target;
     const model = from.model.value;
@@ -29,7 +29,7 @@ const AddProduct = () => {
       postTime: postTime,
       report: "false",
       add: "false",
-      soldOut: "false",
+      soldOut: "In stock",
     };
 
     fetch(`${process.env.REACT_APP_API_URL}/products`, {
@@ -43,7 +43,7 @@ const AddProduct = () => {
       .then((result) => {
         toast.success("your product has been added");
         console.warn(result);
-        from.reset()
+        from.reset();
       });
   };
   return (

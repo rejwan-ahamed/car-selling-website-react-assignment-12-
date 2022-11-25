@@ -1,6 +1,40 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
+import { useQuery } from "react-query";
+import { AuthContext } from "../Context/MainContext";
+import MyProductTableData from "./MyProductTableData";
 
 const MyProducts = () => {
+  const { user } = useContext(AuthContext);
+  const [products, setProducts] = useState([]);
+  console.log(user.email);
+
+  // getting data by react query
+  const { refetch } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: () =>
+      fetch(`http://localhost:5000/productsData/hush@gmail.com`)
+        .then((res) => res.json())
+        .then((result) => setProducts(result)),
+  });
+
+  // getting delete id
+  const deleteID = (id) => {
+    console.log(id);
+    fetch(`http://localhost:5000/productDelete/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged === true) {
+          toast.error("Data deleted");
+          refetch();
+        }
+      });
+  };
+
+  // console.warn(products)
+
   return (
     <div className="px-4 md:px-10 lg:px-20 xl:px-40">
       <div className="top-section">
@@ -11,68 +45,66 @@ const MyProducts = () => {
           Your all products list. Click on add to show your product add.
         </p>
       </div>
-      {/* table part start from here */}
-      <div className="table-main py-10">
-        <div class="overflow-x-auto relative">
-          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-[#F6F7F9] border-b border-gray-200">
-              <tr>
-                <th scope="col" class="py-3 px-6">
-                  Product name
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Location
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Old price
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Price
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Used time
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Set add
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  delete
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="bg-[#F6F7F9] border-b dark:bg-gray-800 dark:border-gray-700">
-                <th
-                  scope="row"
-                  class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  Apple MacBook Pro 17"
-                </th>
-                <td class="py-4 px-6">Sliver</td>
-                <td class="py-4 px-6">Laptop</td>
-                <td class="py-4 px-6">$2999</td>
-                <td class="py-4 px-6">$2999</td>
-                <td class="py-4 px-6">
-                  <button
-                    type="button"
-                    class="py-2 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  >
-                    Advertisement
-                  </button>
-                </td>
-                <td class="py-4 px-6">
-                  <button
-                    type="button"
-                    class="py-2 px-3 text-xs font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      {products.length === 0 ? (
+        <div className="text-section w-full h-screen flex justify-center items-center mt-[-10%]">
+          <h1 className="font-general text-4xl text center font-[500]">
+            You have added no product yet.
+          </h1>
         </div>
-      </div>
+      ) : (
+        <div className="table-main py-10">
+          <div class="overflow-x-auto relative">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead class="text-xs text-gray-700 uppercase bg-[#F6F7F9] border-b border-gray-200">
+                <tr>
+                  <th scope="col" class="py-3 px-6">
+                    Model
+                  </th>
+                  <th scope="col" class="py-3 px-6">
+                    Car tye
+                  </th>
+                  <th scope="col" class="py-3 px-6">
+                    Location
+                  </th>
+                  <th scope="col" class="py-3 px-6">
+                    Price
+                  </th>
+                  <th scope="col" class="py-3 px-6">
+                    old price
+                  </th>
+                  <th scope="col" class="py-3 px-6">
+                    Used
+                  </th>
+                  <th scope="col" class="py-3 px-6">
+                    date
+                  </th>
+                  <th scope="col" class="py-3 px-6">
+                    Stock
+                  </th>
+                  <th scope="col" class="py-3 px-6">
+                    ADS
+                  </th>
+                  <th scope="col" class="py-3 px-6">
+                    Delete
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.map((data) => (
+                  <MyProductTableData
+                    key={data._id}
+                    products={data}
+                    getID={deleteID}
+                  ></MyProductTableData>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* table part start from here */}
+
       {/* table part start end here */}
     </div>
   );
