@@ -5,7 +5,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../Context/MainContext";
 
 const Login = () => {
-  const { userSignIN, googleSignIN } = useContext(AuthContext);
+  const { userSignIN, googleSignIN, user, loader } = useContext(AuthContext);
   const provider = new GoogleAuthProvider();
   const location = useLocation();
   const navigate = useNavigate();
@@ -49,9 +49,13 @@ const Login = () => {
   const googleLoginButtonClicked = () => {
     googleSignIN(provider)
       .then((res) => {
-        console.log(res);
+        const email = res.user.email;
+        console.log(email)
         toast.success("you are successfully login");
         navigate(froms, { replace: true });
+        fetch(`${process.env.REACT_APP_API_URL}/socialLogin/${email}`)
+          .then((res) => res.json())
+          .then((result) => console.warn(result));
       })
       .catch((error) => {
         toast.error(error.message);

@@ -12,6 +12,7 @@ import {
 import app from "../Firebase/Firebase.config";
 import { useState } from "react";
 import { useEffect } from "react";
+import Loader from "../Components/Loader";
 
 export const AuthContext = createContext();
 
@@ -62,6 +63,10 @@ const MainContext = ({ children }) => {
       unsubscribe();
     };
   }, []);
+
+  if(loader){
+    return <Loader></Loader>
+  }
 
   const userInfo = {
     userSignIN,
