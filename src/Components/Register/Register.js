@@ -1,45 +1,47 @@
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/MainContext";
 
 const Register = () => {
-  // const { userRegister, updateUserProfile } = useContext(AuthContext);
-  // UseTitle("Register");
-  // const registerFromSubmit = (e) => {
-  //   e.preventDefault();
-  //   const from = e.target;
-  //   const name = from.name.value;
-  //   const email = from.email.value;
-  //   const img = from.image.value;
-  //   const password = from.password.value;
-  //   const Cpassword = from.Cpassword.value;
+  const { userRegister, updateUserProfile } = useContext(AuthContext);
+  const registerFromSubmit = (e) => {
+    e.preventDefault();
+    const from = e.target;
+    const name = from.name.value;
+    const email = from.email.value;
+    const img = from.image.value;
+    const password = from.password.value;
+    const Cpassword = from.Cpassword.value;
 
-  //   if (password !== Cpassword) {
-  //     toast.error("Your Password and Confirm password dose not match");
-  //   } else {
-  //     userRegister(email, password)
-  //       .then((res) => {
-  //         UserProfile(name, img);
-  //         console.log(res);
-  //         toast.success("Your account has been created please login");
-  //         from.reset();
-  //       })
-  //       .catch((error) => {
-  //         toast.error(error.message);
-  //       });
-  //   }
-  // };
+    if (password !== Cpassword) {
+      toast.error("Your Password and Confirm password dose not match");
+    } else {
+      userRegister(email, password)
+        .then((res) => {
+          UserProfile(name, img);
+          console.log(res);
+          toast.success("Your account has been created please login");
+          from.reset();
+        })
+        .catch((error) => {
+          toast.error(error.message);
+        });
+    }
+  };
 
-  // const UserProfile = (name, image) => {
-  //   const profile = {
-  //     displayName: name,
-  //     photoURL: image,
-  //   };
-  //   updateUserProfile(profile);
-  // };
+  const UserProfile = (name, image) => {
+    const profile = {
+      displayName: name,
+      photoURL: image,
+    };
+    updateUserProfile(profile);
+  };
 
   return (
     <div>
       <div className="register-main flex justify-center items-center mt-20 px-4 mb-20">
-        <form className="w-[20rem] text-left">
+        <form className="w-[20rem] text-left" onSubmit={registerFromSubmit}>
           <div class="mb-6">
             <label
               for="email"
@@ -120,33 +122,17 @@ const Register = () => {
               required=""
             />
           </div>
-          <div class="mb-6">
-            <label
-              for="countries"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Select account type
-            </label>
-            <select
-              id="countries"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-              <option selected>Select account</option>
-              <option value="US">User Account</option>
-              <option value="CA">Seller Account</option>
-            </select>
-          </div>
 
           <button
             type="submit"
-            class="mb-2 text-white bg-blue-500 font-general hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 lg:w-full"
+            class="mb-2 text-white bg-blue-600 font-general hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 lg:w-full"
           >
             Sign Up
           </button>
           {/* redirect to register button */}
           <Link
             to="/login"
-            className=" font-general font-medium hover:text-blue-500"
+            className=" font-general font-medium hover:text-blue-600"
           >
             I already have an account Login
           </Link>
