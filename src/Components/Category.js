@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./Card";
 
 const Category = () => {
+  window.scrollTo(0, 0);
   return (
     <div>
       <div className="upper-part">

@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 const Details = () => {
+  window.scrollTo(0, 0);
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {

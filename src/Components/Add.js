@@ -1,5 +1,6 @@
 import React from "react";
 import { FaCar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Add = () => {
   return (
@@ -7,7 +8,7 @@ const Add = () => {
       <div className=" bg-white rounded-lg font-general">
         <a href="/">
           <img
-            className="rounded-t-lg"
+            className="rounded-t-lg w-full h-[11rem]"
             src="https://tesla-cdn.thron.com/delivery/public/image/tesla/03e533bf-8b1d-463f-9813-9a597aafb280/bvlatuR/std/4096x2560/M3-Homepage-Desktop-LHD"
             alt=""
           />
@@ -70,12 +71,12 @@ const Add = () => {
             </h1>
           </div>
           <div className="button-group flex gap-2">
-            <a
-              href="/"
+            <Link
+              to='/details'
               className="w-full inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 justify-center"
             >
               View details
-            </a>
+            </Link>
             <a
               href="/"
               className="w-full inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 justify-center"

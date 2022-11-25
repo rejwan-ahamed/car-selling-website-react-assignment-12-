@@ -7,7 +7,7 @@ const Header = () => {
     <div class>
       <div className="nav-main border-b font-general">
         <Navbar fluid={true} rounded={true} className="md:mx-20 lg:mx-20 xl:mx-40 bg-[#F6F7F9]">
-          <Navbar.Brand href="https://flowbite.com/">
+          <Link to='/' className="flex">
             <img
               src="/Images/logo.svg"
               className="mr-3 h-6 sm:h-9"
@@ -16,7 +16,7 @@ const Header = () => {
             <span className="self-center whitespace-nowrap text-xl font-semibold">
               GariDhako.com
             </span>
-          </Navbar.Brand>
+          </Link>
           <Navbar.Toggle />
           <Navbar.Collapse className="font-[500]">
             <Link to="/" active={true}>
