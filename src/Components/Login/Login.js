@@ -30,7 +30,7 @@ const Login = () => {
 
         console.log(res);
         const UserData = {
-          email: res.user.email,
+          email: res.user?.email,
         };
 
         console.log(UserData);
@@ -60,7 +60,7 @@ const Login = () => {
   const googleLoginButtonClicked = () => {
     googleSignIN(provider)
       .then((res) => {
-        const email = res.user.email;
+        const email = res.user?.email;
         console.log(email);
         toast.success("you are successfully login");
         navigate(froms, { replace: true });

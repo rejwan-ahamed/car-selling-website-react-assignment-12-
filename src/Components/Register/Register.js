@@ -5,7 +5,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/MainContext";
 
 const Register = () => {
-  const { userRegister, updateUserProfile,SetUserState } = useContext(AuthContext);
+  const { userRegister, updateUserProfile, SetUserState } =
+    useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const froms = location.state?.from?.pathname || "/";
@@ -23,6 +24,7 @@ const Register = () => {
       email: email,
       name: name,
       accountType: account,
+      verifyStatus: false,
     };
 
     if (password !== Cpassword) {

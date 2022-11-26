@@ -11,7 +11,7 @@ const Report = () => {
   const [products, setProducts] = useState([]);
   const [productLength, setProductLength] = useState([]);
   const [AD, setADS] = useState(null);
-  console.log(user.email);
+  console.log(user?.email);
 
   // getting data by react query
   const {

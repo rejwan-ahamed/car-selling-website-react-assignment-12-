@@ -9,13 +9,13 @@ const MyProducts = () => {
   const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const [AD, setADS] = useState(null);
-  console.log(user.email);
+  console.log(user?.email);
 
   // getting data by react query
   const { refetch } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/productsData/${user.email}`)
+      fetch(`http://localhost:5000/productsData/${user?.email}`)
         .then((res) => res.json())
         .then((result) => setProducts(result)),
   });

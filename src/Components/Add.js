@@ -72,7 +72,7 @@ const Add = ({adsData}) => {
           </div>
           <div className="button-group flex gap-2">
             <Link
-              to='/details'
+              to={`/categorys`}
               className="w-full inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 justify-center"
             >
               View details

@@ -1,10 +1,19 @@
 import moment from "moment/moment";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../Context/MainContext";
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
+  const [sellerData, setSellerData] = useState([]);
+
+  // fetching seller data
+  fetch(`http://localhost:5000/userData/${user?.email}`)
+    .then((res) => res.json())
+    .then((result) => setSellerData(result[0]));
+
+  // console.warn(sellerData)
+
   const productData = (e) => {
     const postTime = moment().format("lll");
     e.preventDefault();
@@ -18,7 +27,7 @@ const AddProduct = () => {
     const UsedTime = from.UsedTime.value;
 
     const product = {
-      seller: user.email,
+      seller: user?.email,
       model: model,
       image: image,
       carType: carType,
@@ -30,6 +39,7 @@ const AddProduct = () => {
       report: "false",
       add: "false",
       soldOut: "In stock",
+      verifyStatus: sellerData?.verifyStatus,
     };
 
     fetch(`${process.env.REACT_APP_API_URL}/products`, {

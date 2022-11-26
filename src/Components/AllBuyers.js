@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { AuthContext } from "../Context/MainContext";
-import AllSellerTable from "./AllSellerTable";
+import AllBuyersTable from "./AllBuyersTable";
 import BigLoader from "./BigLoader";
 
 const AllBuyers = () => {
@@ -11,7 +11,7 @@ const AllBuyers = () => {
   const [products, setProducts] = useState([]);
   const [productLength, setProductLength] = useState([]);
   const [AD, setADS] = useState(null);
-  console.log(user.email);
+  console.log(user?.email);
 
   // getting data by react query
   const {
@@ -117,21 +117,18 @@ const AllBuyers = () => {
                     id
                   </th>
                   <th scope="col" class="py-3 px-6">
-                    Verify
-                  </th>
-                  <th scope="col" class="py-3 px-6">
                     Delete
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {products.map((data) => (
-                  <AllSellerTable
+                  <AllBuyersTable
                     key={data._id}
                     products={data}
                     getID={deleteID}
                     adsButton={ADS}
-                  ></AllSellerTable>
+                  ></AllBuyersTable>
                 ))}
               </tbody>
             </table>

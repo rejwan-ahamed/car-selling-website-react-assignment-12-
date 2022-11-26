@@ -22,7 +22,7 @@ const Order = () => {
   const { refetch, isLoading } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/userBookingData/${user.email}`)
+      fetch(`http://localhost:5000/userBookingData/${user?.email}`)
         .then((res) => res.json())
         .then((result) => setOrder(result)),
   });

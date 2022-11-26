@@ -48,7 +48,7 @@ const Service = () => {
 
     const userComment = {
       userName: `${user.displayName}`,
-      email: `${user.email}`,
+      email: `${user?.email}`,
       image: `${user.photoURL}`,
       productID: `${_id}`,
       retting: `${retting}`,

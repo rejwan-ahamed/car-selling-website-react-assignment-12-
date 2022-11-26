@@ -11,7 +11,7 @@ const AllSellers = () => {
   const [products, setProducts] = useState([]);
   const [productLength, setProductLength] = useState([]);
   const [AD, setADS] = useState(null);
-  console.log(user.email);
+  console.log(user?.email);
 
   // getting data by react query
   const {
@@ -29,7 +29,6 @@ const AllSellers = () => {
           setProducts(result);
         }),
   });
-
 
   if (isLoading) {
     return <BigLoader></BigLoader>;
@@ -51,36 +50,26 @@ const AllSellers = () => {
   };
 
   // ads
-  const ADS = (id) => {
-    fetch(`http://localhost:5000/singleProduct/${id}`)
-      .then((res) => res.json())
-      .then((result) => setADS(result[0]));
-    const postTime = moment().format("lll");
-    const ADSbody = {
-      productID: AD._id,
-      image: AD.image,
-      carType: AD.carType,
-      model: AD.model,
-      price: AD.price,
-      seller: AD.seller,
-      location: AD.location,
-      time: postTime,
+  const Verify = (id) => {
+    const sellerUpdateData = {
+      sellerID: id,
+      verifyStatus: true,
     };
-    console.warn(ADSbody);
-    fetch(`${process.env.REACT_APP_API_URL}/productADS`, {
-      method: "POST",
+
+    // /verifyUser
+    console.warn(id);
+    fetch(`${process.env.REACT_APP_API_URL}/verifyUser/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(ADSbody),
+      body: JSON.stringify(sellerUpdateData),
     })
       .then((res) => res.json())
       .then((result) => {
-        toast.success("your product ADS has been published");
-        console.log(result);
+        console.warn(result)
+        toast.success("your product has been added");
       });
-
-    console.warn(id);
   };
 
   // console.warn(products)
@@ -89,7 +78,8 @@ const AllSellers = () => {
     <div className="px-4 md:px-10 lg:px-20 xl:px-40">
       <div className="top-section">
         <h1 className="text-2xl font-general font-[600] text-left pt-10">
-          Total active sellers <span className="text-orange-500">{productLength}</span> 
+          Total active sellers{" "}
+          <span className="text-orange-500">{productLength}</span>
         </h1>
         <p className="font-general font-[500] mb-3">
           Click to verify and delete seller
@@ -130,7 +120,7 @@ const AllSellers = () => {
                     key={data._id}
                     products={data}
                     getID={deleteID}
-                    adsButton={ADS}
+                    verifySeller={Verify}
                   ></AllSellerTable>
                 ))}
               </tbody>

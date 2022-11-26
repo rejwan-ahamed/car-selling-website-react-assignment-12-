@@ -31,7 +31,7 @@ function App() {
         { path: "/blog", element: <Blog></Blog> },
         { path: "/category/:model", element: <Private><Category></Category></Private> },
         { path: "/categorys", element: <Private><Catagories></Catagories></Private> },
-        { path: "/details", element: <Private><Details></Details></Private> },
+        { path: "/details/:id", element: <Private><Details></Details></Private> },
         { path: "/wish", element: <Private><WishList></WishList></Private> },
         { path: "/order", element: <Private><Order></Order></Private> },
         { path: "/add", element: <AddProduct></AddProduct> },

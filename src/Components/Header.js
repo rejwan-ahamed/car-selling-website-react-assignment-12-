@@ -1,10 +1,11 @@
-import { Navbar } from "flowbite-react";
+import { Navbar, Tooltip } from "flowbite-react";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/MainContext";
 
 const Header = () => {
   const { userLogout, user, userState } = useContext(AuthContext);
+  console.log(user?.email)
   console.warn(userState);
   // getting user state from local storage
   const userSateFromLocalStorage = localStorage.getItem("AccountStatus");
@@ -75,12 +76,21 @@ const Header = () => {
             )}
 
             {user ? (
-              <Link
-                onClick={userLogoutButtonClicked}
-                className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700"
-              >
-                Logout
-              </Link>
+              <div className="flex gap-2 items-center">
+                <Link
+                  onClick={userLogoutButtonClicked}
+                  className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700"
+                >
+                  Logout
+                </Link>
+                <Tooltip content={user?.email}>
+                  <img
+                    class="w-8 h-8 rounded-full"
+                    src={user?.photoURL}
+                    alt="Rounded avatar"
+                  />
+                </Tooltip>
+              </div>
             ) : (
               <div className="button-group sm:flex justify-center items-center gap-2 ">
                 <Link
@@ -97,8 +107,6 @@ const Header = () => {
                 </Link>
               </div>
             )}
-
-            
           </Navbar.Collapse>
         </Navbar>
       </div>
