@@ -5,6 +5,7 @@ import { FaCarAlt } from "react-icons/fa";
 import { AuthContext } from "../Context/MainContext";
 import toast from "react-hot-toast";
 import '../Css/Card.css'
+import moment from "moment/moment";
 
 const Card = ({ carData }) => {
   const [productData, setProductData] = useState([]);
@@ -72,9 +73,13 @@ const Card = ({ carData }) => {
 
   // report products
   const reportProduct = (id) => {
+    const ReportTime = moment().format("lll");
     const reportBody = {
       productID: id,
-      user: user.email
+      user: user.email,
+      productName: model,
+      seller: seller,
+      ReportTime: ReportTime,
     };
     fetch(`http://localhost:5000/report`, {
       method: "POST",

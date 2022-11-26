@@ -14,6 +14,9 @@ import MyProducts from "./Components/MyProducts";
 import  { Toaster } from 'react-hot-toast';
 import Private from "./Private/Private";
 import Catagories from "./Components/Catagories";
+import AllSellers from "./Components/AllSellers";
+import AllBuyers from "./Components/AllBuyers";
+import Report from "./Components/Report";
 
 
 function App() {
@@ -33,6 +36,9 @@ function App() {
         { path: "/order", element: <Private><Order></Order></Private> },
         { path: "/add", element: <AddProduct></AddProduct> },
         { path: "/products", element: <Private><MyProducts></MyProducts></Private> },
+        { path: "/allSellers", element: <Private><AllSellers></AllSellers></Private> },
+        { path: "/allBuyers", element: <Private><AllBuyers></AllBuyers></Private> },
+        { path: "/report", element: <Private><Report></Report></Private> },
 
       ],
     },

@@ -4,6 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { FaCarAlt } from "react-icons/fa";
 import { AuthContext } from "../Context/MainContext";
 import toast from "react-hot-toast";
+import moment from "moment/moment";
 
 const Cards = ({ carData }) => {
   const [productData, setProductData] = useState([]);
@@ -71,9 +72,13 @@ const Cards = ({ carData }) => {
 
   // report products
   const reportProduct = (id) => {
+    const ReportTime = moment().format("lll");
     const reportBody = {
       productID: id,
-      user: user.email
+      user: user.email,
+      productName: model,
+      seller: seller,
+      ReportTime: ReportTime,
     };
     fetch(`http://localhost:5000/report`, {
       method: "POST",
@@ -85,7 +90,7 @@ const Cards = ({ carData }) => {
       .then((res) => res.json())
       .then((result) => {
         toast.error("Thank you for your feedback");
-        console.log(result)
+        console.log(result);
       });
   };
 

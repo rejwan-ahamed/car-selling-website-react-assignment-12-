@@ -42,6 +42,15 @@ const Header = () => {
             <Link to="/categorys" className="hover:text-blue-700 mt-2">
               Category
             </Link>
+            <Link to="/allSellers" className="hover:text-blue-700 mt-2">
+              All Sellers
+            </Link>
+            <Link to="/allBuyers" className="hover:text-blue-700 mt-2">
+              All Buyers
+            </Link>
+            <Link to="/report" className="hover:text-blue-700 mt-2">
+              Report
+            </Link>
 
             {userState === "Seller" ? (
               <>
@@ -88,6 +97,8 @@ const Header = () => {
                 </Link>
               </div>
             )}
+
+            
           </Navbar.Collapse>
         </Navbar>
       </div>

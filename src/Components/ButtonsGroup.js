@@ -7,7 +7,7 @@ const ButtonsGroup = () => {
     .then((res) => res.json())
     .then((data) => setCategory(data));
   return (
-    <div className="botton-group-main flex justify-center flex-col items-center mb-20 mt-0 sm:mt-20">
+    <div className="botton-group-main mt-20 flex justify-center flex-col items-center mb-20 sm:mt-20">
       <h1 className="font-general mb-6 font-[500] text-xl px-8 sm:px-0">
         Select your favourite card category
       </h1>
