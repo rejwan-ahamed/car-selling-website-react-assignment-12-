@@ -38,14 +38,14 @@ const Register = () => {
           navigate(froms, { replace: true });
           // axios part here
           axios({
-            url: `${process.env.REACT_APP_API_URL}/userRegister`,
+            url: `http://localhost:5000/userRegister`,
             method: "POST",
             data: userData,
           })
             .then((result) => console.warn(result))
             .catch((error) => console.log(error));
 
-          fetch(`${process.env.REACT_APP_API_URL}/userData/${email}`)
+          fetch(`http://localhost:5000/userData/${email}`)
             .then((res) => res.json())
             .then((result) => {
               localStorage.setItem("AccountStatus", result[0].accountType);

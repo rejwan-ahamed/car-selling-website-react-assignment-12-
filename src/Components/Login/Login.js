@@ -21,7 +21,7 @@ const Login = () => {
     userSignIN(email, password)
       .then((res) => {
         const userEmail = email;
-        fetch(`${process.env.REACT_APP_API_URL}/userData/${userEmail}`)
+        fetch(`http://localhost:5000/userData/${userEmail}`)
           .then((res) => res.json())
           .then((result) => {
             console.warn(result[0].accountType);
@@ -65,14 +65,14 @@ const Login = () => {
         const email = res.user?.email;
         console.log(email);
 
-        fetch(`${process.env.REACT_APP_API_URL}/socialLogin/${email}`)
+        fetch(`http://localhost:5000/socialLogin/${email}`)
           .then((res) => res.json())
           .then((result) => {
             SetUserState(result.accountType);
             localStorage.setItem("AccountStatus", result.accountType);
           });
 
-        fetch(`${process.env.REACT_APP_API_URL}/userData/${email}`)
+        fetch(`http://localhost:5000/userData/${email}`)
           .then((res) => res.json())
           .then((result) => {
             SetUserState(result[0].accountType);

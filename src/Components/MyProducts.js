@@ -52,7 +52,7 @@ const MyProducts = () => {
       time: postTime,
     };
     console.warn(ADSbody);
-    fetch(`${process.env.REACT_APP_API_URL}/productADS`, {
+    fetch(`http://localhost:5000/productADS`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

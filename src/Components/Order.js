@@ -41,9 +41,13 @@ const Order = () => {
       .then((result) => setProducts(result[0]));
   };
 
+  const fromOnSuB =(e)=>{
+    e.preventDefault();
+    setIsOpen(false);
+  }
+
   const payButtonHandler = (id) => {
     // updateUserPaymentStatus
-    console.warn(id)
 
     const UserPayment = {
       paymentStatus: "Payed",
@@ -58,14 +62,13 @@ const Order = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.warn(result);
+        // console.warn(result);
         refetch();
         toast.success("Payment successfully");
       });
-    console.log(id);
+    // console.log(id);
     setIsOpen(false);
   };
-  
 
   return (
     <div className="px-4 md:px-10 lg:px-20 xl:px-40">
@@ -115,8 +118,8 @@ const Order = () => {
                   <td class="py-4 px-6">
                     {data.paymentStatus === "Payed" ? (
                       <button
-                        disabled
-                        class="text-white bg-lime-600 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        type="button"
+                        class="text-white bg-blue-500  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
                         Pied
                       </button>
@@ -129,6 +132,7 @@ const Order = () => {
                         Pay
                       </button>
                     )}
+                   
                   </td>
                 </tr>
               ))}
@@ -164,7 +168,7 @@ const Order = () => {
                     leaveTo="opacity-0 scale-95"
                   >
                     <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                      <form class="space-y-6" action="#">
+                      <form class="space-y-6" action="#" onSubmit={fromOnSuB} >
                         <h5 class="text-xl font-medium text-gray-900 dark:text-white">
                           Belling Details
                         </h5>

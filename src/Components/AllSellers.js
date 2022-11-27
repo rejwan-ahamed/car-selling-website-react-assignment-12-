@@ -58,7 +58,7 @@ const AllSellers = () => {
 
     // /verifyUser
     console.warn(id);
-    fetch(`${process.env.REACT_APP_API_URL}/verifyUser/${id}`, {
+    fetch(`http://localhost:5000/verifyUser/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

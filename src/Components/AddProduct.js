@@ -42,7 +42,7 @@ const AddProduct = () => {
       verifyStatus: sellerData?.verifyStatus,
     };
 
-    fetch(`${process.env.REACT_APP_API_URL}/products`, {
+    fetch(`http://localhost:5000/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
