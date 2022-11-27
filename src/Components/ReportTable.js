@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const ReportTable = ({products,getID,adsButton}) => {
-    const {_id,productID,user,productName,seller,ReportTime} = products
+    const {_id,user,productName,seller,ReportTime} = products
   return (
     <tr class="bg-[#F6F7F9] border-b dark:bg-gray-800 dark:border-gray-700">
       <th

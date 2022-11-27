@@ -35,9 +35,9 @@ const AllSellers = () => {
   }
 
   // getting delete id
-  const deleteID = (id) => {
-    console.log(id);
-    fetch(`http://localhost:5000/productDelete/${id}`, {
+  const deleteID = (email) => {
+    console.log(email);
+    fetch(`http://localhost:5000/sellerDelete/${email}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -68,7 +68,7 @@ const AllSellers = () => {
       .then((res) => res.json())
       .then((result) => {
         console.warn(result)
-        toast.success("your product has been added");
+        toast.success("User verified");
       });
   };
 

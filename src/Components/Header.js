@@ -4,15 +4,20 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/MainContext";
 
 const Header = () => {
-  const { userLogout, user, userState } = useContext(AuthContext);
+  const { userLogout, user, userState,loader } = useContext(AuthContext);
   console.log(user?.email)
   console.warn(userState);
   // getting user state from local storage
-  const userSateFromLocalStorage = localStorage.getItem("AccountStatus");
+  // const userSateFromLocalStorage = localStorage.getItem("AccountStatus");
 
   const userLogoutButtonClicked = () => {
     userLogout();
   };
+
+  if(loader){
+    const userSateFromLocalStorage = localStorage.getItem("AccountStatus");
+    userState(userSateFromLocalStorage)
+  }
   console.log(user);
   return (
     <div class>
@@ -53,7 +58,7 @@ const Header = () => {
               Report
             </Link>
 
-            {userState === "Seller" ? (
+            {userState === "seller" ? (
               <>
                 {" "}
                 <Link to="/add" className="hover:text-blue-700 mt-2">
@@ -66,9 +71,9 @@ const Header = () => {
             ) : (
               <>
                 {" "}
-                <Link to="/wish" className="hover:text-blue-700 mt-2">
+                {/* <Link to="/wish" className="hover:text-blue-700 mt-2">
                   Wish List
-                </Link>
+                </Link> */}
                 <Link to="/order" className="hover:text-blue-700 mt-2">
                   My orders
                 </Link>

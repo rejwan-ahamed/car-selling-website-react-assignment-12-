@@ -3,17 +3,19 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useQuery } from "react-query";
 import { AuthContext } from "../Context/MainContext";
 import Loader from "./Loader";
+import toast from "react-hot-toast";
 
 const Order = () => {
   let [isOpen, setIsOpen] = useState(false);
+  const [products, setProducts] = useState(null);
 
   function closeModal() {
     setIsOpen(false);
   }
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  // function openModal() {
+  //   setIsOpen(true);
+  // }
 
   const [order, setOrder] = useState([]);
   const { user } = useContext(AuthContext);
@@ -30,6 +32,40 @@ const Order = () => {
   if (isLoading) {
     return <Loader></Loader>;
   }
+
+  // form data load handler
+  const fromButton = (id) => {
+    setIsOpen(true);
+    fetch(`http://localhost:5000/userBookingDataByProductID/${id}`)
+      .then((res) => res.json())
+      .then((result) => setProducts(result[0]));
+  };
+
+  const payButtonHandler = (id) => {
+    // updateUserPaymentStatus
+    console.warn(id)
+
+    const UserPayment = {
+      paymentStatus: "Payed",
+    };
+
+    fetch(`http://localhost:5000/updateUserPaymentStatus/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(UserPayment),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.warn(result);
+        refetch();
+        toast.success("Payment successfully");
+      });
+    console.log(id);
+    setIsOpen(false);
+  };
+  
 
   return (
     <div className="px-4 md:px-10 lg:px-20 xl:px-40">
@@ -77,13 +113,22 @@ const Order = () => {
                   <td class="py-4 px-6">{data.location}</td>
                   <td class="py-4 px-6">{data.price}</td>
                   <td class="py-4 px-6">
-                    <button
-                      onClick={() => openModal()}
-                      type="button"
-                      class="text-white bg-lime-600 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    >
-                      Pay
-                    </button>
+                    {data.paymentStatus === "Payed" ? (
+                      <button
+                        disabled
+                        class="text-white bg-lime-600 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      >
+                        Pied
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => fromButton(data.productID)}
+                        type="button"
+                        class="text-white bg-lime-600 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      >
+                        Pay
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -128,9 +173,11 @@ const Order = () => {
                             for="email"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           >
-                            User Name
+                            User email
                           </label>
                           <input
+                            defaultValue={user.email}
+                            readOnly
                             type="email"
                             name="email"
                             id="email"
@@ -144,10 +191,12 @@ const Order = () => {
                             for="password"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           >
-                            Email address
+                            Product
                           </label>
                           <input
-                            type="password"
+                            defaultValue={products?.product}
+                            readOnly
+                            type="text"
                             name="password"
                             id="password"
                             placeholder="tesla@gmail.com"
@@ -160,29 +209,15 @@ const Order = () => {
                             for="password"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           >
-                            Product
+                            Price
                           </label>
                           <input
+                            defaultValue={products?.price}
+                            readOnly
                             type="text"
                             name="password"
                             id="password"
                             placeholder="tesla car"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label
-                            for="password"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                          >
-                            Price
-                          </label>
-                          <input
-                            type="number"
-                            name="password"
-                            id="password"
-                            placeholder="223"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                             required
                           />
@@ -208,10 +243,26 @@ const Order = () => {
                             for="password"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           >
-                            Password
+                            CVC
                           </label>
                           <input
-                            type="password"
+                            type="number"
+                            name="password"
+                            id="password"
+                            placeholder="223"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label
+                            for="password"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            Date
+                          </label>
+                          <input
+                            type="date"
                             name="password"
                             id="password"
                             placeholder="223"
@@ -222,7 +273,7 @@ const Order = () => {
 
                         <div className="button-group flex gap-2">
                           <button
-                            type="submit"
+                            onClick={() => payButtonHandler(products.productID)}
                             class="w-full text-white bg-lime-600 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                           >
                             Pay

@@ -5,7 +5,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../Context/MainContext";
 
 const Login = () => {
-  const { userSignIN, googleSignIN, user, loader, SetUserState } =
+  const { userSignIN, googleSignIN, user, loader, setLoader, SetUserState } =
     useContext(AuthContext);
   const provider = new GoogleAuthProvider();
   const location = useLocation();
@@ -24,8 +24,9 @@ const Login = () => {
         fetch(`${process.env.REACT_APP_API_URL}/userData/${userEmail}`)
           .then((res) => res.json())
           .then((result) => {
-            localStorage.setItem("AccountStatus", result[0].accountType);
+            console.warn(result[0].accountType);
             SetUserState(result[0].accountType);
+            localStorage.setItem("AccountStatus", result[0].accountType);
           });
 
         console.log(res);
@@ -53,6 +54,7 @@ const Login = () => {
         navigate(froms, { replace: true });
       })
       .catch((error) => {
+        setLoader(false);
         toast.error(error.message);
       });
   };
@@ -62,20 +64,27 @@ const Login = () => {
       .then((res) => {
         const email = res.user?.email;
         console.log(email);
-        toast.success("you are successfully login");
-        navigate(froms, { replace: true });
+
         fetch(`${process.env.REACT_APP_API_URL}/socialLogin/${email}`)
           .then((res) => res.json())
-          .then((result) => console.warn(result));
+          .then((result) => {
+            SetUserState(result.accountType);
+            localStorage.setItem("AccountStatus", result.accountType);
+          });
 
         fetch(`${process.env.REACT_APP_API_URL}/userData/${email}`)
           .then((res) => res.json())
           .then((result) => {
-            localStorage.setItem("AccountStatus", result[0].accountType);
             SetUserState(result[0].accountType);
+            console.warn(result[0].accountType);
+            localStorage.setItem("AccountStatus", result[0].accountType);
           });
+
+        toast.success("you are successfully login");
+        navigate(froms, { replace: true });
       })
       .catch((error) => {
+        loader(false);
         toast.error(error.message);
       });
   };

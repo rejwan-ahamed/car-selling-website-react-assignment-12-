@@ -1,4 +1,3 @@
-import moment from "moment/moment";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
@@ -10,7 +9,6 @@ const AllBuyers = () => {
   const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const [productLength, setProductLength] = useState([]);
-  const [AD, setADS] = useState(null);
   console.log(user?.email);
 
   // getting data by react query
@@ -36,9 +34,9 @@ const AllBuyers = () => {
   }
 
   // getting delete id
-  const deleteID = (id) => {
-    console.log(id);
-    fetch(`http://localhost:5000/productDelete/${id}`, {
+  const deleteID = (email) => {
+    console.log(email);
+    fetch(`http://localhost:5000/sellerDelete/${email}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -50,38 +48,7 @@ const AllBuyers = () => {
       });
   };
 
-  // ads
-  const ADS = (id) => {
-    fetch(`http://localhost:5000/singleProduct/${id}`)
-      .then((res) => res.json())
-      .then((result) => setADS(result[0]));
-    const postTime = moment().format("lll");
-    const ADSbody = {
-      productID: AD._id,
-      image: AD.image,
-      carType: AD.carType,
-      model: AD.model,
-      price: AD.price,
-      seller: AD.seller,
-      location: AD.location,
-      time: postTime,
-    };
-    console.warn(ADSbody);
-    fetch(`${process.env.REACT_APP_API_URL}/productADS`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(ADSbody),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        toast.success("your product ADS has been published");
-        console.log(result);
-      });
 
-    console.warn(id);
-  };
 
   // console.warn(products)
 
@@ -127,7 +94,6 @@ const AllBuyers = () => {
                     key={data._id}
                     products={data}
                     getID={deleteID}
-                    adsButton={ADS}
                   ></AllBuyersTable>
                 ))}
               </tbody>

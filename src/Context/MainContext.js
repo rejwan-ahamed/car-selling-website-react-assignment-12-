@@ -63,6 +63,8 @@ const MainContext = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUserInfo) => {
       // SetUserState(userLocalData)
+      const userSateFromLocalStorage = localStorage.getItem("AccountStatus");
+      SetUserState(userSateFromLocalStorage)
       setUser(currentUserInfo);
       setLoader(false);
     });
@@ -83,6 +85,7 @@ const MainContext = ({ children }) => {
     user,
     loader,
     userState,
+    setLoader,
     SetUserState,
     googleSignIN,
     githubSignIN,

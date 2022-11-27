@@ -24,7 +24,7 @@ const Cards = ({ carData }) => {
   } = carData;
   let [isOpen, setIsOpen] = useState(false);
 
-  console.warn(verifyStatus)
+  console.warn(verifyStatus);
 
   function closeModal() {
     setIsOpen(false);
@@ -49,6 +49,7 @@ const Cards = ({ carData }) => {
       phone: phone,
       price: price,
       location: location,
+      paymentStatus: "Unpaid",
     };
     fetch(`http://localhost:5000/userBooking`, {
       method: "POST",
@@ -105,7 +106,7 @@ const Cards = ({ carData }) => {
         </a>
         <div className="p-5">
           <a href="/">
-            <h5 className="text-2xl font-[600] tracking-tight text-gray-900 dark:text-white mb-4">
+            <h5 className="blog-title text-2xl font-[600] tracking-tight text-gray-900 dark:text-white mb-4">
               {model}
             </h5>
           </a>
@@ -265,10 +266,7 @@ const Cards = ({ carData }) => {
             >
               Book now
             </Link>
-            <a
-              href="/"
-              className="w-full inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 justify-center"
-            >
+            <button className="w-full inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -283,7 +281,7 @@ const Cards = ({ carData }) => {
                   d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
                 />
               </svg>
-            </a>
+            </button>
           </div>
 
           {/* modal prat start here */}
