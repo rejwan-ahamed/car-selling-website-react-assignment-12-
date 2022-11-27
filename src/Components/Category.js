@@ -10,7 +10,7 @@ const Category = () => {
   const [car, setCar] = useState([]);
   const [allCars, setAllCars] = useState([]);
   // fetch cars
-  fetch(`http://localhost:5000/CarCategory?model=${paramsModel}`)
+  fetch(`https://assignment-12-backend-kohl.vercel.app/CarCategory?model=${paramsModel}`)
     .then((res) => res.json())
     .then((result) => setCar(result[0]));
 
@@ -20,12 +20,12 @@ const Category = () => {
       const {data:categorys, refetch, isLoading } = useQuery({
         queryKey: ["repoData"],
         queryFn: () =>
-          fetch(`http://localhost:5000/allCars?model=${paramsModel}`)
+          fetch(`https://assignment-12-backend-kohl.vercel.app/allCars?model=${paramsModel}`)
             .then((res) => res.json())
             .then((result) => setAllCars(result)),
       });
 
-  // fetch(`http://localhost:5000/allCars?model=${paramsModel}`)
+  // fetch(`https://assignment-12-backend-kohl.vercel.app/allCars?model=${paramsModel}`)
   //   .then((res) => res.json())
   //   .then((result) => setAllCars(result));
   // window.scrollTo(0, 0);

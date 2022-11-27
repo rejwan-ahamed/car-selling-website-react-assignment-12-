@@ -21,7 +21,7 @@ const AllSellers = () => {
   } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/allSellers?accountType=Seller`)
+      fetch(`https://assignment-12-backend-kohl.vercel.app/allSellers?accountType=Seller`)
         .then((res) => res.json())
         .then((result) => {
           const length = result.length;
@@ -37,7 +37,7 @@ const AllSellers = () => {
   // getting delete id
   const deleteID = (email) => {
     console.log(email);
-    fetch(`http://localhost:5000/sellerDelete/${email}`, {
+    fetch(`https://assignment-12-backend-kohl.vercel.app/sellerDelete/${email}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -58,7 +58,7 @@ const AllSellers = () => {
 
     // /verifyUser
     console.warn(id);
-    fetch(`http://localhost:5000/verifyUser/${id}`, {
+    fetch(`https://assignment-12-backend-kohl.vercel.app/verifyUser/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

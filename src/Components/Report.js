@@ -19,7 +19,7 @@ const Report = () => {
   } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/allReport`)
+      fetch(`https://assignment-12-backend-kohl.vercel.app/allReport`)
         .then((res) => res.json())
         .then((result) => {
           const length = result.length;
@@ -35,7 +35,7 @@ const Report = () => {
   // getting delete id
   const deleteID = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/reportDelete/${id}`, {
+    fetch(`https://assignment-12-backend-kohl.vercel.app/reportDelete/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

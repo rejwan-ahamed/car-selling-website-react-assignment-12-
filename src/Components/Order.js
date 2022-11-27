@@ -24,7 +24,7 @@ const Order = () => {
   const { refetch, isLoading } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/userBookingData/${user?.email}`)
+      fetch(`https://assignment-12-backend-kohl.vercel.app/userBookingData/${user?.email}`)
         .then((res) => res.json())
         .then((result) => setOrder(result)),
   });
@@ -36,7 +36,7 @@ const Order = () => {
   // form data load handler
   const fromButton = (id) => {
     setIsOpen(true);
-    fetch(`http://localhost:5000/userBookingDataByProductID/${id}`)
+    fetch(`https://assignment-12-backend-kohl.vercel.app/userBookingDataByProductID/${id}`)
       .then((res) => res.json())
       .then((result) => setProducts(result[0]));
   };
@@ -53,7 +53,7 @@ const Order = () => {
       paymentStatus: "Payed",
     };
 
-    fetch(`http://localhost:5000/updateUserPaymentStatus/${id}`, {
+    fetch(`https://assignment-12-backend-kohl.vercel.app/updateUserPaymentStatus/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

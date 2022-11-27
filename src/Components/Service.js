@@ -18,7 +18,7 @@ const Service = () => {
   const { refetch } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/comment/${_id}`, {
+      fetch(`https://assignment-12-backend-kohl.vercel.app/comment/${_id}`, {
         headers: {
           authorization: "get all data",
         },
@@ -28,7 +28,7 @@ const Service = () => {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:5000/comment/${_id}`, {
+    fetch(`https://assignment-12-backend-kohl.vercel.app/comment/${_id}`, {
       headers: {
         authorization: "get all data",
       },
@@ -57,7 +57,7 @@ const Service = () => {
       serviceName: `${name}`,
     };
 
-    fetch("http://localhost:5000/comments", {
+    fetch("https://assignment-12-backend-kohl.vercel.app/comments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

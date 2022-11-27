@@ -21,7 +21,7 @@ const Login = () => {
     userSignIN(email, password)
       .then((res) => {
         const userEmail = email;
-        fetch(`http://localhost:5000/userData/${userEmail}`)
+        fetch(`https://assignment-12-backend-kohl.vercel.app/userData/${userEmail}`)
           .then((res) => res.json())
           .then((result) => {
             console.warn(result[0].accountType);
@@ -36,7 +36,7 @@ const Login = () => {
 
         console.log(UserData);
 
-        // fetch("http://localhost:5000/jwt", {
+        // fetch("https://assignment-12-backend-kohl.vercel.app/jwt", {
         //   method: "POST",
         //   headers: {
         //     "Content-Type": "application/json",
@@ -65,14 +65,14 @@ const Login = () => {
         const email = res.user?.email;
         console.log(email);
 
-        fetch(`http://localhost:5000/socialLogin/${email}`)
+        fetch(`https://assignment-12-backend-kohl.vercel.app/socialLogin/${email}`)
           .then((res) => res.json())
           .then((result) => {
             SetUserState(result.accountType);
             localStorage.setItem("AccountStatus", result.accountType);
           });
 
-        fetch(`http://localhost:5000/userData/${email}`)
+        fetch(`https://assignment-12-backend-kohl.vercel.app/userData/${email}`)
           .then((res) => res.json())
           .then((result) => {
             SetUserState(result[0].accountType);

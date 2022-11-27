@@ -38,14 +38,14 @@ const Register = () => {
           navigate(froms, { replace: true });
           // axios part here
           axios({
-            url: `http://localhost:5000/userRegister`,
+            url: `https://assignment-12-backend-kohl.vercel.app/userRegister`,
             method: "POST",
             data: userData,
           })
             .then((result) => console.warn(result))
             .catch((error) => console.log(error));
 
-          fetch(`http://localhost:5000/userData/${email}`)
+          fetch(`https://assignment-12-backend-kohl.vercel.app/userData/${email}`)
             .then((res) => res.json())
             .then((result) => {
               localStorage.setItem("AccountStatus", result[0].accountType);

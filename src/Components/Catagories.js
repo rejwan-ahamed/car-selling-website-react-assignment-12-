@@ -7,7 +7,7 @@ const Catagories = () => {
   const [car, setCar] = useState([]);
   const [allCars, setAllCars] = useState([]);
   // fetch cars
-  fetch("http://localhost:5000/CarCategory")
+  fetch("https://assignment-12-backend-kohl.vercel.app/CarCategory")
     .then((res) => res.json())
     .then((result) => setCar(result[0]));
 
@@ -15,7 +15,7 @@ const Catagories = () => {
     const {data:categorys, refetch, isLoading } = useQuery({
       queryKey: ["repoData"],
       queryFn: () =>
-        fetch(`http://localhost:5000/allCars`)
+        fetch(`https://assignment-12-backend-kohl.vercel.app/allCars`)
           .then((res) => res.json())
           .then((result) => setAllCars(result)),
     });
@@ -25,7 +25,7 @@ const Catagories = () => {
     }
 
   // // fetching all cars list default poursh
-  // fetch("http://localhost:5000/allCars")
+  // fetch("https://assignment-12-backend-kohl.vercel.app/allCars")
   //   .then((res) => res.json())
   //   .then((result) => setAllCars(result));
 

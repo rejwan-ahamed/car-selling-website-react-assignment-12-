@@ -51,7 +51,7 @@ const Cards = ({ carData }) => {
       location: location,
       paymentStatus: "Unpaid",
     };
-    fetch(`http://localhost:5000/userBooking`, {
+    fetch(`https://assignment-12-backend-kohl.vercel.app/userBooking`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ const Cards = ({ carData }) => {
   };
 
   function openModal(id) {
-    fetch(`http://localhost:5000/singleProduct/${id}`)
+    fetch(`https://assignment-12-backend-kohl.vercel.app/singleProduct/${id}`)
       .then((res) => res.json())
       .then((result) => setProductData(result[0]));
     setIsOpen(true);
@@ -84,7 +84,7 @@ const Cards = ({ carData }) => {
       seller: seller,
       ReportTime: ReportTime,
     };
-    fetch(`http://localhost:5000/report`, {
+    fetch(`https://assignment-12-backend-kohl.vercel.app/report`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

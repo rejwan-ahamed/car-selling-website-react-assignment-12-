@@ -15,7 +15,7 @@ const MyProducts = () => {
   const { refetch } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/productsData/${user?.email}`)
+      fetch(`https://assignment-12-backend-kohl.vercel.app/productsData/${user?.email}`)
         .then((res) => res.json())
         .then((result) => setProducts(result)),
   });
@@ -23,7 +23,7 @@ const MyProducts = () => {
   // getting delete id
   const deleteID = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/productDelete/${id}`, {
+    fetch(`https://assignment-12-backend-kohl.vercel.app/productDelete/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -37,7 +37,7 @@ const MyProducts = () => {
 
   // ads
   const ADS = (id) => {
-    fetch(`http://localhost:5000/singleProduct/${id}`)
+    fetch(`https://assignment-12-backend-kohl.vercel.app/singleProduct/${id}`)
       .then((res) => res.json())
       .then((result) => setADS(result[0]));
     const postTime = moment().format("lll");
@@ -52,7 +52,7 @@ const MyProducts = () => {
       time: postTime,
     };
     console.warn(ADSbody);
-    fetch(`http://localhost:5000/productADS`, {
+    fetch(`https://assignment-12-backend-kohl.vercel.app/productADS`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

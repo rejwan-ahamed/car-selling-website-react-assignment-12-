@@ -1,22 +1,38 @@
 import { Navbar, Tooltip } from "flowbite-react";
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/MainContext";
+import CheckAdmin from "./ChechAdmin";
+import CheckBuyer from "./CheckBuyer";
+import CheckSeller from "./CheckSeller";
 
 const Header = () => {
-  const { userLogout, user, userState,loader } = useContext(AuthContext);
-  console.log(user?.email)
-  console.warn(userState);
+  const { userLogout, user, userState, loader } = useContext(AuthContext);
+  console.log(user?.email);
+  // console.warn(userState);
   // getting user state from local storage
   // const userSateFromLocalStorage = localStorage.getItem("AccountStatus");
+
+
+  // admin state check
+  const [isAdmin] = CheckAdmin(user?.email);
+  // console.warn(isAdmin);
+
+  // buyer sate check
+  const [isBuyer] = CheckBuyer(user?.email);
+  console.warn('is buyer' , isBuyer);
+
+  const [isSeller] = CheckSeller(user?.email);
+  console.warn("is seller", isSeller);
+
 
   const userLogoutButtonClicked = () => {
     userLogout();
   };
 
-  if(loader){
+  if (loader) {
     const userSateFromLocalStorage = localStorage.getItem("AccountStatus");
-    userState(userSateFromLocalStorage)
+    userState(userSateFromLocalStorage);
   }
   console.log(user);
   return (
@@ -48,34 +64,35 @@ const Header = () => {
             <Link to="/categorys" className="hover:text-blue-700 mt-2">
               Category
             </Link>
-            <Link to="/allSellers" className="hover:text-blue-700 mt-2">
-              All Sellers
-            </Link>
-            <Link to="/allBuyers" className="hover:text-blue-700 mt-2">
-              All Buyers
-            </Link>
-            <Link to="/report" className="hover:text-blue-700 mt-2">
-              Report
-            </Link>
-
-            {userState === "seller" ? (
+            {isAdmin && (
               <>
-                {" "}
+                <Link to="/allSellers" className="hover:text-blue-700 mt-2">
+                  All Sellers
+                </Link>
+                <Link to="/allBuyers" className="hover:text-blue-700 mt-2">
+                  All Buyers
+                </Link>
+                <Link to="/report" className="hover:text-blue-700 mt-2">
+                  Report
+                </Link>
+              </>
+            )}
+
+            {isBuyer && (
+              <>
+                <Link to="/order" className="hover:text-blue-700 mt-2">
+                  My orders
+                </Link>
+              </>
+            )}
+
+            {isSeller && (
+              <>
                 <Link to="/add" className="hover:text-blue-700 mt-2">
                   Add product
                 </Link>
                 <Link to="/products" className="hover:text-blue-700 mt-2">
                   My Products
-                </Link>
-              </>
-            ) : (
-              <>
-                {" "}
-                {/* <Link to="/wish" className="hover:text-blue-700 mt-2">
-                  Wish List
-                </Link> */}
-                <Link to="/order" className="hover:text-blue-700 mt-2">
-                  My orders
                 </Link>
               </>
             )}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ButtonsGroup = () => {
   const [category, setCategory] = useState([]);
-  fetch("http://localhost:5000/allCarCategory")
+  fetch("https://assignment-12-backend-kohl.vercel.app/allCarCategory")
     .then((res) => res.json())
     .then((data) => setCategory(data));
   return (

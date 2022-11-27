@@ -8,7 +8,7 @@ const AddProduct = () => {
   const [sellerData, setSellerData] = useState([]);
 
   // fetching seller data
-  fetch(`http://localhost:5000/userData/${user?.email}`)
+  fetch(`https://assignment-12-backend-kohl.vercel.app/userData/${user?.email}`)
     .then((res) => res.json())
     .then((result) => setSellerData(result[0]));
 
@@ -42,7 +42,7 @@ const AddProduct = () => {
       verifyStatus: sellerData?.verifyStatus,
     };
 
-    fetch(`http://localhost:5000/products`, {
+    fetch(`https://assignment-12-backend-kohl.vercel.app/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
