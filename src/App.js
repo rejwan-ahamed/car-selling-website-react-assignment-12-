@@ -17,6 +17,9 @@ import Catagories from "./Components/Catagories";
 import AllSellers from "./Components/AllSellers";
 import AllBuyers from "./Components/AllBuyers";
 import Report from "./Components/Report";
+import AdminPrivate from "./AdminPrivate/AdminPrivate";
+import SellerPrivate from "./SellerPrivate/SellerPrivate";
+import BuyerPrivate from "./BuyerPrivate/BuyerPrivate";
 
 
 function App() {
@@ -33,12 +36,12 @@ function App() {
         { path: "/categorys", element: <Private><Catagories></Catagories></Private> },
         { path: "/details/:id", element: <Private><Details></Details></Private> },
         { path: "/wish", element: <Private><WishList></WishList></Private> },
-        { path: "/order", element: <Private><Order></Order></Private> },
-        { path: "/add", element: <AddProduct></AddProduct> },
-        { path: "/products", element: <Private><MyProducts></MyProducts></Private> },
-        { path: "/allSellers", element: <Private><AllSellers></AllSellers></Private> },
-        { path: "/allBuyers", element: <Private><AllBuyers></AllBuyers></Private> },
-        { path: "/report", element: <Private><Report></Report></Private> },
+        { path: "/order", element: <BuyerPrivate><Order></Order></BuyerPrivate> },
+        { path: "/add", element: <SellerPrivate><AddProduct></AddProduct></SellerPrivate> },
+        { path: "/products", element: <SellerPrivate><MyProducts></MyProducts></SellerPrivate> },
+        { path: "/allSellers", element: <AdminPrivate><AllSellers></AllSellers></AdminPrivate> },
+        { path: "/allBuyers", element: <AdminPrivate><AllBuyers></AllBuyers></AdminPrivate> },
+        { path: "/report", element: <AdminPrivate><Report></Report></AdminPrivate> },
 
       ],
     },

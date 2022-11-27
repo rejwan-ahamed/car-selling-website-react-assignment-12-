@@ -15,7 +15,9 @@ const MyProducts = () => {
   const { refetch } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`https://assignment-12-backend-kohl.vercel.app/productsData/${user?.email}`)
+      fetch(
+        `https://assignment-12-backend-kohl.vercel.app/productsData/${user?.email}`
+      )
         .then((res) => res.json())
         .then((result) => setProducts(result)),
   });
@@ -26,6 +28,32 @@ const MyProducts = () => {
     fetch(`https://assignment-12-backend-kohl.vercel.app/productDelete/${id}`, {
       method: "DELETE",
     })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged === true) {
+          // toast.error("Data deleted");
+        }
+      });
+    fetch(
+      `https://assignment-12-backend-rejwan-ahamed.vercel.app/adsDelete/${id}`,
+      {
+        method: "DELETE",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged === true) {
+          // toast.error("Data deleted");
+          // refetch();
+        }
+      });
+
+    fetch(
+      `https://assignment-12-backend-rejwan-ahamed.vercel.app/SellerUserBookingDelete/${id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged === true) {

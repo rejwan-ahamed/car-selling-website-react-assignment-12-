@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const MyProductTableData = ({products,getID,adsButton}) => {
     const {_id,model,carType,location,price,oldPrice,UsedTime,postTime,add,soldOut} = products
