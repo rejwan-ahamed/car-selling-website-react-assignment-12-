@@ -58,7 +58,7 @@ const AllSellers = () => {
 
     // /verifyUser
     console.warn(id);
-    fetch(`https://assignment-12-backend-kohl.vercel.app/verifyUser/${id}`, {
+    fetch(`https://assignment-12-backend-rejwan-ahamed.vercel.app/verifyUser/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

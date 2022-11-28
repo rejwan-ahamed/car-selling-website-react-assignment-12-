@@ -45,12 +45,33 @@ const Register = () => {
             .then((result) => console.warn(result))
             .catch((error) => console.log(error));
 
-          fetch(`https://assignment-12-backend-kohl.vercel.app/userData/${email}`)
+          fetch(
+            `https://assignment-12-backend-kohl.vercel.app/userData/${email}`
+          )
             .then((res) => res.json())
             .then((result) => {
               localStorage.setItem("AccountStatus", result[0].accountType);
               SetUserState(result[0].accountType);
             });
+
+          // token start here
+          const UserData = {
+            email: email,
+          };
+          console.log(UserData);
+          fetch("https://assignment-12-backend-rejwan-ahamed.vercel.app/jwt", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(UserData),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              console.warn(result);
+              localStorage.setItem("token", result.token);
+            });
+          // token end here
 
           from.reset();
         })

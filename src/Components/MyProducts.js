@@ -16,7 +16,12 @@ const MyProducts = () => {
     queryKey: ["repoData"],
     queryFn: () =>
       fetch(
-        `https://assignment-12-backend-kohl.vercel.app/productsData/${user?.email}`
+        `https://assignment-12-backend-rejwan-ahamed.vercel.app/productsData/${user?.email}`,
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
       )
         .then((res) => res.json())
         .then((result) => setProducts(result)),

@@ -15,7 +15,7 @@ const MyProductTableData = ({products,getID,adsButton}) => {
       <td class="py-4 px-6 text-orange-500 font-medium">{price}</td>
       <td class="py-4 px-6 text-blue-500 font-medium">{oldPrice}</td>
       <td class="py-4 px-6 ">{UsedTime}</td>
-      <td class="py-4 px-6">{postTime}</td>
+      <td class="py-4 px-6">{postTime}</td> 
       <td class="py-4 px-6">{soldOut}</td>
       <td class="py-4 px-6">
         <button
