@@ -20,6 +20,7 @@ import Report from "./Components/Report";
 import AdminPrivate from "./AdminPrivate/AdminPrivate";
 import SellerPrivate from "./SellerPrivate/SellerPrivate";
 import BuyerPrivate from "./BuyerPrivate/BuyerPrivate";
+import NotFound from './Components/NotFound/NotFound'
 
 
 function App() {
@@ -45,6 +46,9 @@ function App() {
 
       ],
     },
+    {
+      path:'*', element:<NotFound></NotFound>
+    }
   ]);
   return (
     <div className="App">

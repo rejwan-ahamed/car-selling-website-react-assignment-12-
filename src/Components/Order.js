@@ -24,7 +24,14 @@ const Order = () => {
   const { refetch, isLoading } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`https://assignment-12-backend-kohl.vercel.app/userBookingData/${user?.email}`)
+      fetch(
+        `https://assignment-12-backend-rejwan-ahamed.vercel.app/userBookingData/${user?.email}`,
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      )
         .then((res) => res.json())
         .then((result) => setOrder(result)),
   });
@@ -36,15 +43,17 @@ const Order = () => {
   // form data load handler
   const fromButton = (id) => {
     setIsOpen(true);
-    fetch(`https://assignment-12-backend-kohl.vercel.app/userBookingDataByProductID/${id}`)
+    fetch(
+      `https://assignment-12-backend-kohl.vercel.app/userBookingDataByProductID/${id}`
+    )
       .then((res) => res.json())
       .then((result) => setProducts(result[0]));
   };
 
-  const fromOnSuB =(e)=>{
+  const fromOnSuB = (e) => {
     e.preventDefault();
     setIsOpen(false);
-  }
+  };
 
   const payButtonHandler = (id) => {
     // updateUserPaymentStatus
@@ -53,13 +62,16 @@ const Order = () => {
       paymentStatus: "Payed",
     };
 
-    fetch(`https://assignment-12-backend-kohl.vercel.app/updateUserPaymentStatus/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(UserPayment),
-    })
+    fetch(
+      `https://assignment-12-backend-kohl.vercel.app/updateUserPaymentStatus/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(UserPayment),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         // console.warn(result);
@@ -114,7 +126,7 @@ const Order = () => {
                   </th>
                   <td class="py-4 px-6">{data.sellerEmail}</td>
                   <td class="py-4 px-6">{data.location}</td>
-                  <td class="py-4 px-6">{data.price}</td>
+                  <td class="py-4 px-6">${data.price}</td>
                   <td class="py-4 px-6">
                     {data.paymentStatus === "Payed" ? (
                       <button
@@ -132,7 +144,6 @@ const Order = () => {
                         Pay
                       </button>
                     )}
-                   
                   </td>
                 </tr>
               ))}
@@ -168,7 +179,7 @@ const Order = () => {
                     leaveTo="opacity-0 scale-95"
                   >
                     <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                      <form class="space-y-6" action="#" onSubmit={fromOnSuB} >
+                      <form class="space-y-6" action="#" onSubmit={fromOnSuB}>
                         <h5 class="text-xl font-medium text-gray-900 dark:text-white">
                           Belling Details
                         </h5>

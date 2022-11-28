@@ -21,7 +21,9 @@ const Login = () => {
     userSignIN(email, password)
       .then((res) => {
         const userEmail = email;
-        fetch(`https://assignment-12-backend-kohl.vercel.app/userData/${userEmail}`)
+        fetch(
+          `https://assignment-12-backend-kohl.vercel.app/userData/${userEmail}`
+        )
           .then((res) => res.json())
           .then((result) => {
             console.warn(result[0].accountType);
@@ -29,25 +31,24 @@ const Login = () => {
             localStorage.setItem("AccountStatus", result[0].accountType);
           });
 
-        console.log(res);
+        // token start here
         const UserData = {
-          email: res.user?.email,
+          email: res.user.email,
         };
-
         console.log(UserData);
-
-        // fetch("https://assignment-12-backend-kohl.vercel.app/jwt", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify(UserData),
-        // })
-        //   .then((res) => res.json())
-        //   .then((result) => {
-        //     console.warn(result)
-        //     localStorage.setItem('token', result.token)
-        //   });
+        fetch("https://assignment-12-backend-rejwan-ahamed.vercel.app/jwt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(UserData),
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            console.warn(result);
+            localStorage.setItem("token", result.token);
+          });
+        // token end here
 
         from.reset();
         toast.success("You are successfully login");
@@ -65,7 +66,30 @@ const Login = () => {
         const email = res.user?.email;
         console.log(email);
 
-        fetch(`https://assignment-12-backend-kohl.vercel.app/socialLogin/${email}`)
+
+                // token start here
+                const UserData = {
+                  email: res.user.email,
+                };
+                console.warn(UserData)
+                console.log(UserData)
+                fetch("https://assignment-12-backend-rejwan-ahamed.vercel.app/jwt", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(UserData),
+                })
+                  .then((res) => res.json())
+                  .then((result) => {
+                    console.warn(result)
+                    localStorage.setItem('token', result.token)
+                  });
+                  // token end here
+
+        fetch(
+          `https://assignment-12-backend-kohl.vercel.app/socialLogin/${email}`
+        )
           .then((res) => res.json())
           .then((result) => {
             SetUserState(result.accountType);
