@@ -51,6 +51,7 @@ const AllSellers = () => {
 
   // ads
   const Verify = (id) => {
+    console.warn(id)
     const sellerUpdateData = {
       sellerID: id,
       verifyStatus: true,

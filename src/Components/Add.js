@@ -15,7 +15,7 @@ const Add = ({adsData}) => {
         </a>
         <div className="p-5">
           <a href="/">
-            <h5 className="text-2xl font-[600] tracking-tight text-gray-900 dark:text-white">
+            <h5 className="blog-title text-2xl font-[600] tracking-tight text-gray-900 dark:text-white">
             {adsData.model}
             </h5>
           </a>

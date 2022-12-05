@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/MainContext";
 
 const Register = () => {
-  const { userRegister, updateUserProfile, SetUserState } =
+  const {userSignIN, setLoader, userRegister, updateUserProfile, SetUserState } =
     useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,8 +34,8 @@ const Register = () => {
         .then((res) => {
           UserProfile(name, img);
           console.log(res);
-          toast.success("Your account has been created please login");
-          navigate(froms, { replace: true });
+          // toast.success("Your account has been created please login");
+          // navigate(froms, { replace: true });
           // axios part here
           axios({
             url: `https://assignment-12-backend-kohl.vercel.app/userRegister`,
@@ -72,6 +72,48 @@ const Register = () => {
               localStorage.setItem("token", result.token);
             });
           // token end here
+
+          userSignIN(email, password)
+            .then((res) => {
+              const userEmail = email;
+              fetch(
+                `https://assignment-12-backend-kohl.vercel.app/userData/${userEmail}`
+              )
+                .then((res) => res.json())
+                .then((result) => {
+              setLoader(false)
+                });
+
+              // token start heref
+              const UserData = {
+                email: res.user.email,
+              };
+              console.log(UserData);
+              fetch(
+                "https://assignment-12-backend-rejwan-ahamed.vercel.app/jwt",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(UserData),
+                }
+              )
+                .then((res) => res.json())
+                .then((result) => {
+                  console.warn(result);
+                  localStorage.setItem("token", result.token);
+                });
+              // token end here
+
+              from.reset();
+              toast.success("You are successfully login");
+              navigate(froms, { replace: true });
+            })
+            .catch((error) => {
+              setLoader(false);
+              toast.error(error.message);
+            });
 
           from.reset();
         })

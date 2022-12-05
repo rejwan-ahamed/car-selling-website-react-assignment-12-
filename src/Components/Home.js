@@ -7,7 +7,7 @@ import CarCategores from "./CarCategorys";
 
 const Home = () => {
   const [addData, setAddData] = useState([]);
-  fetch("https://assignment-12-backend-kohl.vercel.app/getAllProductADS")
+  fetch("https://assignment-12-backend-rejwan-ahamed.vercel.app/getAllProductADS")
     .then((res) => res.json())
     .then((result) => setAddData(result));
   return (
